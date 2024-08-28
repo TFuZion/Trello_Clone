@@ -21,10 +21,10 @@ import { computed } from 'vue';
         justify-content: center;
         align-items: center;
         font-size: 12px;
-        font-weight: 500;
+        font-weight: 600;
         background-color: orange;
-        width: 24px;
-        height: 24px;
+        width: 26px;
+        height: 26px;
         border-radius: 100%;
     }
 </style>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-const API = "http://localhost:3000/lists"
+const API = "http://localhost:3000/lists/"
 
 export async function getList(){
     const lists = ref([])
