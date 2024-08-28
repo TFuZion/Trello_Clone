@@ -1,11 +1,13 @@
 <template>
-  <Form class="input-card">
+  <Form class="input-card" @submit="handleSubmit">
     <Field
       type="text"
       placeholder="Titre"
-      v-model="cardName"
-      @keyup="createCard"
+      id="title"
+      name="title"
+      v-model="cardTitle"
     />
+    <Field type="url" id="image" name="image" v-model="cardImage" />
     <Field
       as="textarea"
       id="description"
@@ -19,7 +21,7 @@
       name="endDAte"
       v-model="cardEndDate"
     />
-    <Field type="url" id="image" name="image" v-model="cardImage" />
+    <button type="submit">Enregistrer</button>
   </Form>
 </template>
 
@@ -29,35 +31,28 @@ import { Field, Form } from "vee-validate";
 import { useCardStore } from "@/store/index.js";
 
 const store = useCardStore();
-
-// Props
-defineProps({
-  listId: {
-    type: String,
-    required: true,
-  },
-});
-
-const cardName = ref("");
+const cardTitle = ref("");
 const cardDescription = ref("");
 const cardIsDone = ref(false);
 const cardEndDate = ref("");
 const cardImage = ref("");
 
-const createCard = () => {
-  if (cardName.value !== "") {
-    const card = {
-      listId: props.listId,
-      name: cardName.value,
-      description: cardDescription.value,
-      isDone: cardIsDone.value,
-      endDate: cardEndDate.value,
-      image: cardImage.value,
-      // TODO: Add other necessary attributes here.
-    };
-    // Dispatch action to store
-    store.createCard(card);
-  }
+const card = defineProps({
+  card: {
+    type: Object,
+    default: () => ({
+      title: "",
+      description: "",
+      isDone: false,
+      enDate: "",
+      image: "",
+    }),
+  },
+});
+
+const handleSubmit = () => {
+  console.table(card);
+  store.createCard(card);
 };
 </script>
 
