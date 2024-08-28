@@ -15,7 +15,6 @@ function handleSubmit() {
     }
 
     const listNameToSend = listName.value
-    console.log('handle submit from compo nent : ',listNameToSend );
     emit('list-name-change', listNameToSend)
     listName.value = '';
 }
