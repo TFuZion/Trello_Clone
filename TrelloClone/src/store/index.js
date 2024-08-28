@@ -1,39 +1,22 @@
 import { defineStore } from "pinia";
+import { computed, ref } from "vue";
 
-export const useCardStore = defineStore("card", {
+export const useCardStore = defineStore("cardStore", {
   state: () => ({
-    lastCardId: 0,
     cards: [],
-    isOverlayVisible: false,
   }),
   actions: {
-    createCard(payload) {
-      this.lastCardId++;
-      const card = {
-        listId: payload.listId,
-        id: this.lastCardId,
-        name: payload.name,
-        description: payload.description || "",
-        isDone: payload.isDone || false,
-        endDate: payload.endDate || null,
-        image: payload.image || null,
-        // Add other attributes
-      };
+    addCard(card) {
       this.cards.push(card);
     },
-    saveCard(payload) {
-      const cardIndex = this.cards.findIndex((card) => card.id === payload.id);
-      if (cardIndex !== -1) {
-        this.cards[cardIndex] = { ...this.cards[cardIndex], ...payload };
+    removeCard(carId) {
+      this.cards = this.cards.filter((card) => card.id !== carId);
+    },
+    updateCard(updatedCard) {
+      const index = this.card.findIndex((card) => card.id === updatedCard.id);
+      if (index !== -1) {
+        this.cards[index] = updatedCard;
       }
-    },
-    deleteCard(payload) {
-      this.cards = this.cards.filter((card) => card.id !== payload.id);
-    },
-  },
-  getters: {
-    getCardById: (state) => (id) => {
-      return state.cards.find((card) => card.id === id);
     },
   },
 });
