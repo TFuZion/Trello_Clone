@@ -12,7 +12,7 @@
       <Field
         as="textarea"
         id="description"
-        name="description "
+        name="description"
         v-model="cardDescription"
       />
       <Field type="checkbox" id="isDone" name="isDone" v-model="cardIsDone" />
