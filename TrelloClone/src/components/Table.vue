@@ -1,9 +1,11 @@
 <script setup>
-const testdiv = 6;
+import { useTables } from '@/composable/useTable';
+
+const {tables, load} = useTables();
 </script>
 
 <template>
-  <section id="container">
+  <section id="table-container">
     <section id="grid">
       <li id="list" v-for="test in testdiv">
       </li>
@@ -16,7 +18,10 @@ const testdiv = 6;
 </template>
 
 <style scoped>
-#container {
+#table-container {
+  background-image: url("../assets/backgroudTableImg/flower.svg");
+  background-position: center center;
+  background-size: cover;
   display: flex;
   width: 100%;
   padding: 10px;

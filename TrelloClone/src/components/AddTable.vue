@@ -88,15 +88,44 @@ const handleCreateTable = async () => {
         <p>Fond d'écran</p>
         <div id="grid-select-background">
           <ul>
-            <li><button @click="classBackgroudTableImg = 'a'"></button></li>
-            <li><button @click="classBackgroudTableImg = 'b'"></button></li>
-            <li><button @click="classBackgroudTableImg = 'c'"></button></li>
-            <li><button @click="classBackgroudTableImg = 'd'"></button></li>
-            <li><button @click="classBackgroudTableImg = 'e'"></button></li>
-            <li><button @click="classBackgroudTableImg = 'f'"></button></li>
-            <li><button @click="classBackgroudTableImg = 'g'"></button></li>
-            <li><button @click="classBackgroudTableImg = 'h'"></button></li>
-            <li><button @click="classBackgroudTableImg = 'i'"></button></li>
+            <li>
+              <button @click="classBackgroudTableImg = 'a'"></button>
+              <div></div>
+            </li>
+            <li>
+              <button @click="classBackgroudTableImg = 'b'"></button>
+              <div></div>
+            </li>
+            <li>
+              <button @click="classBackgroudTableImg = 'c'"></button>
+              <div>
+                <span></span>
+              </div>
+            </li>
+            <li>
+              <button @click="classBackgroudTableImg = 'd'"></button>
+              <div></div>
+            </li>
+            <li>
+              <button @click="classBackgroudTableImg = 'e'"></button>
+              <div></div>
+            </li>
+            <li>
+              <button @click="classBackgroudTableImg = 'f'"></button>
+              <div></div>
+            </li>
+            <li>
+              <button @click="classBackgroudTableImg = 'g'"></button>
+              <div></div>
+            </li>
+            <li>
+              <button @click="classBackgroudTableImg = 'h'"></button>
+              <div></div>
+            </li>
+            <li>
+              <button @click="classBackgroudTableImg = 'i'"></button>
+              <div></div>
+            </li>
           </ul>
         </div>
       </div>
@@ -259,6 +288,7 @@ p {
     > li {
       width: 100%;
       height: 50px;
+      position: relative;
       > button {
         display: flex;
         position: relative;
@@ -278,6 +308,19 @@ p {
         color: #091e420f;
         line-height: 0;
         cursor: pointer;
+      }
+      > div {
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        position: absolute;
+        z-index: 2;
+        top: 0;
+        opacity: 0;
+        transition: opacity 200ms ease;
+      }
+      > div:hover {
+        opacity: 0.3;
       }
     }
   }
