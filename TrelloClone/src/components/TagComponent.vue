@@ -19,13 +19,13 @@ const textColor = computed(() =>{
     let hslColor = convert.hex.hsl(color)
 
     // If the color is to dark, makes the text white
-    if(hslColor[2] < 50){
+    if(hslColor[2] < 40){
         return "#ffffff"
     }
 
     // HSL is hue, saturation, lightness. The converter returns an array of 3 integers. corresponding to hue, saturation and lightness. Reducing [1] and [2] makes the color darker
     hslColor[1] -= 15;
-    hslColor[2] -= 65;
+    hslColor[2] -= 40;
     return "#" + convert.hsl.hex(hslColor)
     
 })
@@ -45,6 +45,9 @@ const styleObject = {
 </template>
 
 <style scoped>
+p {
+    margin: 0;
+}
 div {
     display: inline-block;
     position: relative;
@@ -57,7 +60,7 @@ div {
     border-radius: 3px;
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 700;
     line-height: 32px;
     text-align: left;
     text-overflow: ellipsis;
