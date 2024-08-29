@@ -1,8 +1,55 @@
 <script setup>
 import { Form, Field } from "vee-validate";
 import { ref } from "vue";
+import { useCreateTable } from "@/composable/useCreateTable";
+import { useTables } from "@/composable/useTable";
 
+const PATH_BACKGROUND = "@/assets/backgroundTableImg/";
 const classBackgroudTableImg = ref("a");
+const nameTable = ref("");
+const { load } = useTables();
+const { createTable } = useCreateTable();
+
+const handleCreateTable = async () => {
+  const table = {};
+  console.log(nameTable.value);
+  table.name = nameTable.value;
+  console.log(classBackgroudTableImg.value);
+  switch (classBackgroudTableImg.value) {
+    case "a":
+      table.background = `${PATH_BACKGROUND}ice.svg`;
+      break;
+    case "b":
+      table.background = `${PATH_BACKGROUND}ocean.svg`;
+      break;
+    case "c":
+      table.background = `${PATH_BACKGROUND}crystal.svg`;
+      break;
+    case "d":
+      table.background = `${PATH_BACKGROUND}rainbow.svg`;
+      break;
+    case "e":
+      table.background = `${PATH_BACKGROUND}sun.svg`;
+      break;
+    case "f":
+      table.background = `${PATH_BACKGROUND}flower.svg`;
+      break;
+    case "g":
+      table.background = `${PATH_BACKGROUND}earth.svg`;
+      break;
+    case "h":
+      table.background = `${PATH_BACKGROUND}alien.svg`;
+      break;
+    case "i":
+      table.background = `${PATH_BACKGROUND}volcano.svg`;
+      break;
+    default:
+      table.background = `${PATH_BACKGROUND}ice.svg`;
+  }
+  await createTable(table);
+  load();
+  console.log(table);
+};
 </script>
 
 <template>
@@ -53,15 +100,18 @@ const classBackgroudTableImg = ref("a");
           </ul>
         </div>
       </div>
-      <Form id="form-add-table">
+      <form id="form-add-table" @submit.prevent="handleCreateTable()">
         <div id="title-table">
           Titre du tableau
           <span class="red">*</span>
         </div>
-        <!-- <Field name="tabelName" aria-invalid="false" aria-required="true"/> -->
-        <input type="text" />
-        <button>Créer</button>
-      </Form>
+        <input v-model="nameTable" required />
+        <div id="input-empty" v-show="!nameTable">
+          <span>👋</span>
+          <p>Le tableau doit avoir un titre</p>
+        </div>
+        <button :disabled="!nameTable">Créer</button>
+      </form>
     </div>
   </section>
 </template>
@@ -123,7 +173,8 @@ header {
     background: transparent;
     cursor: pointer;
   }
-  button:hover, button:active {
+  button:hover,
+  button:active {
     background-color: #091e4224;
     color: #44546f;
   }
@@ -295,15 +346,22 @@ li:nth-child(9) {
     border-radius: 3px;
     text-decoration: none;
     white-space: normal;
-    cursor: not-allowed;
+    cursor: pointer;
     border: none;
-    background-color: #091e420f;
+    background-color: var(--ds-background-brand-bold, #0c66e4);
     box-shadow: none;
-    color: #172b4d;
+    color: var(--ds-text-inverse, #ffffff);
     font-weight: 500;
     transition-property: background-color, border-color, box-shadow;
     transition-duration: 85ms;
     transition-timing-function: ease;
+  }
+  > button:disabled {
+    border: none;
+    background-color: var(--ds-background-disabled, #091e4208);
+    box-shadow: none;
+    color: var(--ds-text-disabled, #091e424f);
+    cursor: not-allowed;
   }
 }
 #title-table {
@@ -340,5 +398,21 @@ input {
   box-shadow: inset 0 0 0 1px #091e4224;
   width: 100%;
   margin-bottom: 4px;
+}
+#input-empty {
+  display: flex;
+  flex-direction: row;
+  color: #172b4d;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  > p {
+    margin: 0 0 8px;
+  }
+  > span {
+    margin-right: 8px;
+  }
 }
 </style>
