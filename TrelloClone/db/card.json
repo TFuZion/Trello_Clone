@@ -1,15 +1,16 @@
 {
     "card":[
-   {     
-    "title": "",
-    "description": "",
-    "isDone": false,
-    "enDate": "",
-    "image": "",
-    "listId":"",
-    "cardMemberId":"",
-    "cardTagId":"",
-    "creationDate":"",
-    "comments":{},
-    ]}
+        {     
+        "title": "",
+        "description": "",
+        "isDone": false,
+        "enDate": "",
+        "image": "",
+        "listId":"",
+        "cardMemberId":"",
+        "cardTagId":"",
+        "creationDate":"",
+        "comments":{}
+        }
+    ]
 }
