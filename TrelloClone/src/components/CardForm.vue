@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="CardForm">
     <Form class="input-card" @submit="handleSubmit">
       <Field
         type="text"
@@ -31,19 +31,13 @@
 <script setup>
 import { ref } from "vue";
 import { Field, Form } from "vee-validate";
-// import { useCardStore } from "@/store/index.js";
 import { useCreateCard } from "@/composables/useCards";
 import { useCard } from "@/composables/useCards";
 import { useUpdateCard } from "@/composables/useCards";
 import CardVue from "@/components/Card.vue";
 
-// const store = useCardStore();
-
 const { create } = useCreateCard();
 const { cards, load } = useCard();
-// const { update } = useUpdateCard();
-
-// const updatedCard = ref(null);
 
 const cardTitle = ref("");
 const cardDescription = ref("");
@@ -75,16 +69,20 @@ async function handleSubmit(formValues) {
 </script>
 
 <style scoped>
+.CardForm {
+  gap: 20px;
+}
 .input-card {
-  position: relative;
-  background-color: white;
-  min-height: 30px;
-  width: 100%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   border-radius: 5px;
-  padding: 10px;
-  word-break: break-all;
-  font-size: 16px;
+  width: 50%;
+  margin: auto;
+  gap: 10px;
+  padding-bottom: 30px;
+}
+.input-card button {
+  align-self: center;
+  width: 10%;
 }
 </style>
