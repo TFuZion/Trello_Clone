@@ -29,8 +29,20 @@
 import { ref } from "vue";
 import { Field, Form } from "vee-validate";
 import { useCardStore } from "@/store/index.js";
+import { useCreateCard } from "@/composables/useCards";
+import { useDeleteCard } from "@/composables/useCards";
+import { useCard } from "@/composables/useCards";
+import { useUpdateCard } from "@/composables/useCards";
 
 const store = useCardStore();
+
+const { create } = useCreateUser();
+const { cards, load } = useCards();
+const { remove } = useCreateCard();
+const { update } = useUpdateCard();
+
+const updatedCard = ref(null);
+
 const cardTitle = ref("");
 const cardDescription = ref("");
 const cardIsDone = ref(false);
@@ -46,13 +58,17 @@ const card = defineProps({
       isDone: false,
       enDate: "",
       image: "",
+      listId: "",
+      cardMemberId: "",
+      cardTagId: "",
+      creationDate: "",
+      comments: {},
     }),
   },
 });
 
-const handleSubmit = () => {
-  console.table(card);
-  store.createCard(card);
+const handleSubmit = (values) => {
+  create(values);
 };
 </script>
 
