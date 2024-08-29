@@ -72,7 +72,7 @@ function handleListNameChange(value) {
 </script>
 
 <template>
-        <draggable :list="list.cards" group="cards" item-key="id" tag="section" class="card-container list">
+        <draggable :list="list.cards" group="cards" item-key="id" tag="section" class="list">
             <template #header>
                 <header>
                     <div class="list-name" @click="openModal(listNameModal)">
@@ -147,7 +147,7 @@ ul {
     width: 272px;
     background-color: #f1f2f4;
     border-radius: 10px;
-    padding: 0px 0px 8px;
+    padding: 0px 8px 8px;
     display: flex;
     flex-direction: column;
     gap: 10px;
