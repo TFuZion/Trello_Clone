@@ -1,7 +1,7 @@
 import { onMounted, ref } from "vue";
 import axios from "axios";
 
-const API = "http://localhost:3000/card";
+const API = "http://localhost:3000/cards";
 
 export function useCard() {
   const cards = ref(null);
@@ -10,6 +10,20 @@ export function useCard() {
     try {
       const res = await axios.get(API);
       cards.value = res.data;
+      console.log(cards);
+      //Format JSON complet de card
+      //   {
+      //     "title": "",
+      //     "description": "",
+      //     "isDone": false,
+      //     "enDate": "",
+      //     "image": "",
+      //     "listId": "",
+      //     "cardMemberId": "",
+      //     "cardTagId": "",
+      //     "creationDate": "",
+      //     "comments": {}
+      //   },
     } catch (e) {
       console.log(e);
       error.value = e.message;
@@ -19,7 +33,7 @@ export function useCard() {
     load();
   });
 
-  return { card, error, load };
+  return { cards, error, load };
 }
 
 export function useCreateCard() {
