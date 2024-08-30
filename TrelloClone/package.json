@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "api": "json-server --watch ./db/card.json"
+    "api": "json-server --watch ./src/database/db.json"
   },
   "dependencies": {
     "axios": "^1.7.5",
