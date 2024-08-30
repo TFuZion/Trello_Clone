@@ -13,6 +13,11 @@ const router = createRouter({
       path: '/addTable',
       name: 'addTable',
       component: () => import('../components/AddTable.vue')
+    },
+    {
+      path: '/filterCard',
+      name: 'filter',
+      component: () => import('../components/FilterCard.vue')
     }
   ]
 })
