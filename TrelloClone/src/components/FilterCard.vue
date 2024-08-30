@@ -30,6 +30,14 @@
       <p id="infos-input">
         Recherchez des cartes, des membres, des étiquettes et plus encore.
       </p>
+      <div id="filter-by-mark">
+        <p>Étiquettes</p>
+        <ul>
+          <li></li>
+          <li></li>
+          <li></li>
+        </ul>
+      </div>
     </div>
   </section>
 </template>
@@ -150,5 +158,23 @@ input:hover {
 input:focus {
   background-color: #ffffff;
   box-shadow: inset 0 0 0 2px #388bff;
+}
+
+#filter-by-mark {
+  color: #172b4d;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  > p {
+    color: #44546f;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+  > ul {
+    list-style: none;
+  }
 }
 </style>
