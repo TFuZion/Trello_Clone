@@ -1,7 +1,27 @@
-<script setup></script>
+<script setup>
+import Table from "@/components/TableComponents/Table.vue";
+</script>
 
 <template>
-  <h1>Home</h1>
+  <main>
+    <div id="navbar"></div>
+    <div id="table">
+      <Table />
+    </div>
+  </main>
 </template>
 
-<style scoped></style>
+<style scoped>
+main {
+  display: flex;
+}
+#navbar {
+  min-height: 100dvh;
+  width: 20%;
+}
+#table {
+  display: flex;
+  width: 80%;
+  min-height: 100dvh;
+}
+</style>
