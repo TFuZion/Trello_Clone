@@ -33,7 +33,6 @@ import { ref } from "vue";
 import { Field, Form } from "vee-validate";
 import { useCreateCard } from "@/composables/useCards";
 import { useCard } from "@/composables/useCards";
-import { useUpdateCard } from "@/composables/useCards";
 import CardVue from "@/components/Card.vue";
 
 const { create } = useCreateCard();

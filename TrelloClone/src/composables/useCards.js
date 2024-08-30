@@ -51,7 +51,7 @@ export function useCreateCard() {
 export function useUpdateCard() {
   async function update(id, card) {
     try {
-      const res = await axios.put(API + id, card);
+      const res = await axios.put(API + "/" + id, card);
       return res.data;
     } catch (e) {
       console.log(e);
