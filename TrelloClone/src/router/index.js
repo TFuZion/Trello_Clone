@@ -12,12 +12,12 @@ const router = createRouter({
     {
       path: '/filterCard',
       name: 'filter',
-      component: () => import('../components/FilterCard.vue')
+      component: () => import('../components/TableComponents/FilterCard.vue')
     },
     {
       path: '/addTable',
       name: 'addTable',
-      component: () => import('../components/AddTable.vue')
+      component: () => import('../components/TableComponents/AddTable.vue')
     }
   ]
 })
