@@ -2,8 +2,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import ListComponent from '@/components/ListComponent.vue'
 import TempTableComponent from '@/views/TempTableComponent.vue'
-import TagComponent from '@/components/TagComponent.vue'
-import TagSelectorComponent from '@/components/TagSelectorComponent.vue'
+import TagComponent from '@/components/TagsComponents/TagComponent.vue'
+import TagSelectorComponent from '@/components/TagsComponents/TagSelectorComponent.vue'
+import TagCreatorComponent from '@/components/TagsComponents/TagCreatorComponent.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,7 +31,7 @@ const router = createRouter({
     {
       path: '/tag-selector',
       name: 'tag selector',
-      component: TagSelectorComponent
+      component: TagCreatorComponent
     }
   ]
 })
