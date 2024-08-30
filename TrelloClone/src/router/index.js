@@ -31,6 +31,11 @@ const router = createRouter({
     {
       path: '/tag-selector',
       name: 'tag selector',
+      component: TagSelectorComponent
+    },
+    {
+      path: '/tag-creator',
+      name: 'tag creator',
       component: TagCreatorComponent
     }
   ]

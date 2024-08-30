@@ -6,13 +6,15 @@ const DOMInput = ref(null)
 const cardName = ref('')
 const emit = defineEmits(['add-card', 'close'])
 
-function handleSubmit() {
+async function handleSubmit() {
     if (cardName.value === '') {
         handleClose();
         return
     }
     const cardNameToSend = cardName.value
-    emit('add-card', cardNameToSend)
+    // TODO implement addCard()
+    const res = await addCard(cardNameToSend)
+    emit('add-card', res)
     cardName.value = '';
 }
 

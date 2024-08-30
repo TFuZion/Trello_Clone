@@ -1,18 +1,25 @@
 <script setup>
+import {addTag ,removeTag } from '@/composables/TagRepository';
 import TagComponent from './TagComponent.vue';
 import { ref, onMounted } from 'vue'
+
+
 const emit = defineEmits(['return', 'close-tag-modal', 'create-tag', 'delete-tag'])
+
 const colorList = ['#baf3d8', '#f8e6a0', '#fedec8', '#ffd5d2', '#dfd8fd',
     '#4bce97', '#f5cd47', '#fea362', '#f87168', '#9f8fef',
     '#1f845a', '#946f00', '#c25100', '#c9372c', '#6e5dc6',
 ];
 
+
 const props = defineProps({
     tag: {
+        id: null,
         color: String,
         content: String,
         type: Object,
         default: {
+            id: null,
             color: '#4bce97',
             content: ''
         }
@@ -28,18 +35,21 @@ function setBackgroundColor(color) {
     tagColor.value = color
 }
 
-function createTag() {
+async function createTag() {
     const tag = {
         color: tagColor.value,
         content: tagContent.value
     }
+    const res = await addTag(tag)
+    console.log(res);
     emit('create-tag', tag);
     console.log(tag.color);
     console.log(tag.content);
 }
 
-function deleteTag(tag){
-    emit('delete-tag', tag)
+async function deleteTag(tag){
+    const res = await removeTag(tag.id)
+    emit('delete-tag', res)
 }
 
 onMounted(() => {

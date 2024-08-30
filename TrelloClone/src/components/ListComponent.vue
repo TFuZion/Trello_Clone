@@ -10,7 +10,7 @@ const props = defineProps({
         name: String,
         cards: [],
         members: [],
-
+        type: Object,
         default: {
             id: 1,
             name: "List Name",
@@ -51,19 +51,20 @@ function closeModal() {
 //#endregion
 
 //#region EVENT HANDLING
-function handleAddCard(value) {
+async function handleAddCard(value) {
     const card = {
         name: value,
         members: []
     }
     props.list.cards.push(value)
-    updateList(props.list.id, props.list)
+    const res = updateList(props.list.id, props.list)
+    list = res
     closeModal();
 }
 
-function handleListNameChange(value) {
-    props.list.name = value
-    updateList(props.list.id, props.list)
+function handleListNameChange(list) {
+
+    props.list.name = list.name
     closeModal()
 }
 //#endregion

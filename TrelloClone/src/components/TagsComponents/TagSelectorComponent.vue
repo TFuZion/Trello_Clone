@@ -1,7 +1,14 @@
 <script setup>
+import { updateTag } from '@/composables/TagRepository';
 import TagComponent from './TagComponent.vue';
-import {ref} from 'vue'
+import { ref } from 'vue'
+import { updateList } from '@/composables/ListRepository';
 const props = defineProps({
+    card: {
+        id: null,
+        name: String,
+        tags: [],
+    },
     tags: {
         type: Array,
         default: [{
@@ -37,17 +44,20 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits(['create-tag', 'modify-tag', 'close-tag-modal', 'update-tag-list'])
+const emit = defineEmits(['create-tag', 'edit-tag', 'close-tag-modal', 'update-tag-list'])
 
 const checkedTags = ref([])
 
-function modifyTag(tag) {
-    
-    emit('modify-tag', tag)
+function editTag(tag) {
+    emit('edit-tag', tag)
 }
 
-function handleOnChange(){
-    emit('update-tag-list', checkedTags.value)
+async function handleOnChange() {
+    props.card.tags = checkedTags.value
+
+    // TODO implement updateCard logic
+    const res = await updateCard()
+    emit('update-tag-list', res)
 }
 
 </script>
@@ -60,11 +70,12 @@ function handleOnChange(){
         </header>
         <div class="tag-list">
             <div class="tag-container" v-for="(tag, index) in tags" :key="tag">
-                <input type="checkbox" v-model="checkedTags" :name="index" :id="index" :value="tag" @change="handleOnChange">
+                <input type="checkbox" v-model="checkedTags" :name="index" :id="index" :value="tag"
+                    @change="handleOnChange">
                 <label :for="index">
-                    <TagComponent :color="tag.color" class="tag"/>
+                    <TagComponent :color="tag.color" class="tag" />
                 </label>
-                <button @click="modifyTag(tag)">Edit</button>
+                <button @click="editTag(tag)">Edit</button>
             </div>
         </div>
         <button class="create-button" @click="$emit('create-tag')">Create new tag</button>
@@ -108,7 +119,7 @@ h2 {
     gap: 8px;
 }
 
-.tag{
+.tag {
     width: 200px;
 }
 
