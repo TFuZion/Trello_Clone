@@ -2,19 +2,27 @@
 import { ref } from 'vue'
 import ListInputComponent from './ListInputComponent.vue';
 import ListNameInputComponent from './ListNameInputComponent.vue';
-import ProfilePictureComponent from './ProfilePictureComponent.vue';
+import ProfilePictureComponent from '@/components/ProfilePictureComponent.vue';
+import draggable from 'vuedraggable'
 import { updateList } from '@/composables/ListRepository';
 const props = defineProps({
     list: {
         name: String,
         cards: [],
         members: [],
-
+        type: Object,
         default: {
             id: 1,
             name: "List Name",
-            cards: ["tache 1", "tache 2", "tache 3"],
-            members: ['Rémi Debruyne','Manu Max']
+            cards: [{
+                name: "a",
+                members: ['Rémi Debruyne', 'Manu Max']
+            },
+            {
+                name: "c",
+                members: ['Manu Max']
+            }
+            ],
         }
     }
 })
@@ -43,15 +51,20 @@ function closeModal() {
 //#endregion
 
 //#region EVENT HANDLING
-function handleAddCard(value) {
+async function handleAddCard(value) {
+    const card = {
+        name: value,
+        members: []
+    }
     props.list.cards.push(value)
-    updateList(props.list.id, props.list)
+    const res = updateList(props.list.id, props.list)
+    list = res
     closeModal();
 }
 
-function handleListNameChange(value) {
-    props.list.name = value
-    updateList(props.list.id, props.list)
+function handleListNameChange(list) {
+
+    props.list.name = list.name
     closeModal()
 }
 //#endregion
@@ -60,38 +73,41 @@ function handleListNameChange(value) {
 </script>
 
 <template>
-    <section class="list">
-        <header>
-            <div class="list-name" @click="openModal(listNameModal)">
-                <!-- Display the name or an input to change it -->
-                <h2 v-if="!isUpdatingListName">
-                    {{ list.name }}
-                </h2>
-                <!-- Decomposed ListComponent into sub component to not overcrowed it with logic -->
-                <ListNameInputComponent v-else @list-name-change="handleListNameChange" @close="closeModal()"
-                    :list-name-props="list.name" />
-            </div>
-            <button @click="$emit('delete')" class="delete-button">X</button>
-        </header>
-        <ul class="card-container">
-            <li v-for="(card, index) in list.cards" :key="card">
-                <div class="card">
-                    {{ card }}
-                    <div class="profile-picture">
-                        <ProfilePictureComponent v-for="(member, index) in list.members" :key="index"  :name="member" />
+        <draggable :list="list.cards" group="cards" item-key="id" tag="section" class="list">
+            <template #header>
+                <header>
+                    <div class="list-name" @click="openModal(listNameModal)">
+                        <!-- Display the name or an input to change it -->
+                        <h2 v-if="!isUpdatingListName">
+                            {{ list.name }}
+                        </h2>
+                        <!-- Decomposed ListComponent into sub component to not overcrowed it with logic -->
+                        <ListNameInputComponent v-else @list-name-change="handleListNameChange" @close="closeModal()"
+                            :list-name-props="list.name" />
                     </div>
+                    <button @click="$emit('delete')" class="delete-button">X</button>
+                </header>
+            </template>
+            <template #item="{ element, index }">
+                        <div class="card">
+                            {{ element.name }}
+                            <div class="profile-picture">
+                                <ProfilePictureComponent v-for="(element, index) in element.members" :key="index"
+                                    :name="element" />
+                            </div>
+                        </div>
+            </template>
+            <template #footer>
+                <!-- Display a button to add a card or an input to add a card -->
+                <div v-if="!isAddingCard">
+                    <button @click="openModal(cardModal)" class="add-card-button">+ Ajouter une carte</button>
                 </div>
-            </li>
-            <!-- Display a button to add a card or an input to add a card -->
-            <li v-if="!isAddingCard">
-                <button @click="openModal(cardModal)" class="add-card-button">+ Ajouter une carte</button>
-            </li>
-            <li v-else="isAddingCard">
-                <!-- Decomposed ListComponent into sub component to not overcrowed it with logic -->
-                <ListInputComponent @add-card="handleAddCard" @close="closeModal()" />
-            </li>
-        </ul>
-    </section>
+                <div v-else="isAddingCard">
+                    <!-- Decomposed ListComponent into sub component to not overcrowed it with logic -->
+                    <ListInputComponent @add-card="handleAddCard" @close="closeModal()" />
+                </div>
+            </template>
+        </draggable>
 </template>
 
 <style scoped>
@@ -123,9 +139,6 @@ h2 {
 }
 
 ul {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
     list-style-type: none;
     padding: 2px 4px;
     margin: 0px 4px;
@@ -135,7 +148,10 @@ ul {
     width: 272px;
     background-color: #f1f2f4;
     border-radius: 10px;
-    padding: 0px 0px 8px;
+    padding: 0px 8px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 header {
@@ -173,6 +189,7 @@ header {
 }
 
 .add-card-button {
+    margin-top: 10px;
     width: 100%;
     border-radius: 8px;
     padding: 6px 12px 6px 8px;

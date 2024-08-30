@@ -4,11 +4,47 @@
       "id": "1",
       "name": "List Name",
       "cards": [
-        "tache 1",
-        "tache 2",
-        "tache 3",
-        "dqsdsd"
+        {
+          "name": "a",
+          "members": [
+            "Rémi Debruyne",
+            "Manu Max"
+          ]
+        },
+        {
+          "name": "c",
+          "members": [
+            "Manu Max"
+          ]
+        }
       ]
+    }
+  ],
+  "tags": [
+    {
+      "id": "98e8",
+      "color": "#4bce97",
+      "content": "qsdqsd"
+    },
+    {
+      "id": "7063",
+      "color": "#ffd5d2",
+      "content": "dqsdqs"
+    },
+    {
+      "id": "fe86",
+      "color": "#f8e6a0",
+      "content": "dqsdsq"
+    },
+    {
+      "id": "b67f",
+      "color": "#fedec8",
+      "content": "qsdsqd"
+    },
+    {
+      "id": "ca15",
+      "color": "#f8e6a0",
+      "content": "dsqdsq"
     }
   ]
 }
