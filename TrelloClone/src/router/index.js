@@ -10,14 +10,14 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/addTable',
-      name: 'addTable',
-      component: () => import('../components/AddTable.vue')
-    },
-    {
       path: '/filterCard',
       name: 'filter',
       component: () => import('../components/FilterCard.vue')
+    },
+    {
+      path: '/addTable',
+      name: 'addTable',
+      component: () => import('../components/AddTable.vue')
     }
   ]
 })
