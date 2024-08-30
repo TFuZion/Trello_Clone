@@ -1,8 +1,8 @@
 <script setup>
 import { Form, Field } from "vee-validate";
 import { ref } from "vue";
-import { useCreateTable } from "@/composable/useCreateTable";
-import { useTables } from "@/composable/useTable";
+import { useCreateTable } from "@/composables/tableComposables/useCreateTable";
+import { useTables } from "@/composables/tableComposables/useTable";
 
 const PATH_BACKGROUND = "@/assets/backgroundTableImg/";
 const classBackgroudTableImg = ref("a");

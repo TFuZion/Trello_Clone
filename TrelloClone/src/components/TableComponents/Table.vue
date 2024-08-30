@@ -1,5 +1,5 @@
 <script setup>
-import { useTables } from '@/composable/useTable';
+import { useTables } from '@/composables/tableComposables/useTable';
 
 const {tables, load} = useTables();
 </script>

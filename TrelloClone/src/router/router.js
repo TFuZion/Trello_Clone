@@ -6,6 +6,8 @@ import TempTableComponent from '@/views/TempTableComponent.vue';
 import TagComponent from '@/components/TagsComponents/TagComponent.vue';
 import TagSelectorComponent from '@/components/TagsComponents/TagComponent.vue';
 import TagCreatorComponent from '@/components/TagsComponents/TagCreatorComponent.vue';
+import AddTable from '@/components/TableComponents/AddTable.vue';
+import FilterCard from '@/components/TableComponents/FilterCard.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -37,6 +39,14 @@ const router = createRouter({
     {
       path: '/tag-creator',
       component: TagCreatorComponent,
+    },
+    {
+      path: '/tab-creator',
+      component: AddTable,
+    },
+    {
+      path: '/filter-card',
+      component: FilterCard,
     },
   ],
 });
