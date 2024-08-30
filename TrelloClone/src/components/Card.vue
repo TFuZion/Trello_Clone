@@ -1,55 +1,44 @@
 <template>
-  <section class="card">
-    <ul v-if="cards">
-      <li v-for="c in cards" :key="c.id">
-        <h3>Titre: {{ c.title }}</h3>
-        <p>Description: {{ c.description }}</p>
-        <p>Date de fin: {{ c.endDate }}</p>
-        <p>Complété: {{ c.isDone }}</p>
-        <button @click="handleRemove(c.id)">Delete</button>
-      </li>
-    </ul>
-    <section class="cardForm" v-if="cards">
-      <Form
-        class="input-card"
-        @submit="handleSubmit"
-        v-for="c in cards"
-        :key="c.id"
+  <section class="cardForm" v-if="cards">
+    <Form
+      class="input-card"
+      @submit="handleSubmit"
+      v-for="c in cards"
+      :key="c.id"
+    >
+      <Field name="id" style="display: none" :model-value="c.id" />
+      <Field
+        type="text"
+        placeholder="Titre"
+        id="title"
+        name="title"
+        :model-value="c.title"
       >
-        <Field name="id" style="display: none" :model-value="c.id" />
-        <Field
-          type="text"
-          placeholder="Titre"
-          id="title"
-          name="title"
-          :model-value="c.title"
-        >
-        </Field>
-        <Field type="url" id="image" name="image" :model-value="c.image" />
-        <Field
-          as="textarea"
-          id="description"
-          name="description"
-          :model-value="c.description"
-        ></Field>
-        <Field
-          type="checkbox"
-          id="isDone"
-          name="isDone"
-          :model-value="c.isDone"
-        ></Field>
-        <Field
-          type="datetime-local"
-          id="endDate"
-          name="endDate"
-          :model-value="c.endDate"
-        ></Field>
-        <div class="btn-gtp">
-          <button type="submit">Modifier</button>
-          <button @click="handleRemove(c.id)">Delete</button>
-        </div>
-      </Form>
-    </section>
+      </Field>
+      <!-- <Field type="url" id="image" name="image" :model-value="c.image" /> -->
+      <Field
+        as="textarea"
+        id="description"
+        name="description"
+        :model-value="c.description"
+      ></Field>
+      <Field
+        type="checkbox"
+        id="isDone"
+        name="isDone"
+        :model-value="c.isDone"
+      ></Field>
+      <Field
+        type="datetime-local"
+        id="endDate"
+        name="endDate"
+        :model-value="c.endDate"
+      ></Field>
+      <div class="btn-gtp">
+        <button type="submit">Modifier</button>
+        <button @click="handleRemove(c.id)">Delete</button>
+      </div>
+    </Form>
   </section>
 </template>
 
@@ -102,5 +91,9 @@ async function handleRemove(id) {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+textarea {
+  width: 500px;
+  height: 200px;
 }
 </style>
