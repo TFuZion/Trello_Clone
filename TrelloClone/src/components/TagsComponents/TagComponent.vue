@@ -1,9 +1,9 @@
 <script setup>
 import { computed } from 'vue'
-import convert, { hsl } from 'color-convert'
+import convert from 'color-convert'
 
 const props = defineProps({
-    color: {
+    backgroundColor: {
         type: String,
         default: '#579dff'
     },
@@ -13,33 +13,28 @@ const props = defineProps({
     }
 })
 
-const textColor = computed(() =>{
+const textColor = computed(() => {
     // remove # from the hex code for the converter 
-    const color = props.color.replace('#', "");
+    const color = props.backgroundColor.replace('#', "");
     let hslColor = convert.hex.hsl(color)
 
     // If the color is to dark, makes the text white
-    if(hslColor[2] < 40){
+    if (hslColor[2] < 40) {
         return "#ffffff"
     }
 
     // HSL is hue, saturation, lightness. The converter returns an array of 3 integers. corresponding to hue, saturation and lightness. Reducing [1] and [2] makes the color darker
-    hslColor[1] -= 15;
+    hslColor[1] -= 5;
     hslColor[2] -= 40;
     return "#" + convert.hsl.hex(hslColor)
-    
-})
 
-const styleObject = {
-    backgroundColor: props.color,
-    color: textColor.value
-}
+})
 
 
 </script>
 
 <template>
-    <div :style="styleObject">
+    <div>
         <p>{{ content }}</p>
     </div>
 </template>
@@ -48,7 +43,10 @@ const styleObject = {
 p {
     margin: 0;
 }
+
 div {
+    background-color: v-bind(backgroundColor);
+    color: v-bind(textColor);
     display: inline-block;
     position: relative;
     box-sizing: border-box;
