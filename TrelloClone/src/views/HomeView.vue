@@ -10,7 +10,6 @@ const table = await getTableById(1)
     <div id="navbar"></div>
     <div id="table">
       <TableComponent :initialTable="table" />
-      <button @click="console.table(table.lists)">table from homeview</button>
     </div>
   </main>
 </template>

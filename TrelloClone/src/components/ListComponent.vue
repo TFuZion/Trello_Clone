@@ -8,7 +8,7 @@ import { updateList } from '@/composables/ListRepository';
 import { List } from '@/Classes/List';
 const props = defineProps({
     list: {
-        type: Object,
+        type: List,
         default: {
             id: 1,
             name: "List Name",
@@ -66,46 +66,40 @@ function handleListNameChange(listFrominput) {
     closeModal()
 }
 //#endregion
-
-
 </script>
 
 <template>
-        <draggable :list="list.cards" group="cards" item-key="id" tag="section" class="list">
-            <template #header>
-                <header>
-                    <div class="list-name" @click="openModal(listNameModal)">
-                        <!-- Display the name or an input to change it -->
-                        <h2 v-if="!isUpdatingListName">
-                            {{ list.name }}
-                        </h2>
-                        <!-- Decomposed ListComponent into sub component to not overcrowed it with logic -->
-                        <ListNameInputComponent v-else @list-name-change="handleListNameChange" @close="closeModal()"
-                            :list-name-props="list.name" />
-                    </div>
-                    <button @click="$emit('delete')" class="delete-button">X</button>
-                </header>
-            </template>
+    <section class="list">
+        <header class="list-name" @click="openModal(listNameModal)">
+                <!-- Display the name or an input to change it -->
+                <h2 v-if="!isUpdatingListName">
+                    {{ list.name }}
+                </h2>
+                <!-- Decomposed ListComponent into sub component to not overcrowed it with logic -->
+                <ListNameInputComponent v-else @list-name-change="handleListNameChange" @close="closeModal()"
+                    :list-name-props="list.name" />
+            <button @click="$emit('delete')" class="delete-button">X</button>
+        </header>
+        <draggable :list="list.cards" group="cards" item-key="id" tag="div" class="card-container">
             <template #item="{ element, index }">
-                        <div class="card">
-                            {{ element.name }}
-                            <div class="profile-picture">
-                                <ProfilePictureComponent v-for="(element, index) in element.members" :key="index"
-                                    :name="element" />
-                            </div>
-                        </div>
-            </template>
-            <template #footer>
-                <!-- Display a button to add a card or an input to add a card -->
-                <div v-if="!isAddingCard">
-                    <button @click="openModal(cardModal)" class="add-card-button">+ Ajouter une carte</button>
-                </div>
-                <div v-else="isAddingCard">
-                    <!-- Decomposed ListComponent into sub component to not overcrowed it with logic -->
-                    <ListInputComponent @add-card="handleAddCard" @close="closeModal()" />
+                <div class="card">
+                    {{ element.name }}
+                    <div class="profile-picture">
+                        <ProfilePictureComponent v-for="(element, index) in element.members" :key="index"
+                            :name="element" />
+                    </div>
                 </div>
             </template>
         </draggable>
+        <!-- Display a button to add a card or an input to add a card -->
+        <div v-if="!isAddingCard">
+            <button @click="openModal(cardModal)" class="add-card-button">+ Ajouter une carte</button>
+        </div>
+        <div v-else="isAddingCard">
+            <!-- Decomposed ListComponent into sub component to not overcrowed it with logic -->
+            <ListInputComponent @add-card="handleAddCard" @close="closeModal()" />
+        </div>
+    </section>
 </template>
 
 <style scoped>
@@ -114,11 +108,32 @@ function handleListNameChange(listFrominput) {
     font-family: 'Roboto', sans-serif;
 }
 
+.list {
+    width: 272px;
+    border-radius: 10px;
+    padding: 0px 8px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #f1f2f4;
+    height: fit-content;
+}
+
 .list-name:hover {
     cursor: pointer;
 }
 
+header {
+    vertical-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 8px 8px;
+    overflow-wrap: break-word;
+
+}
 h2 {
+    width: 80%;
     font-size: 14px;
     margin: 0;
     padding: 6px 8px 6px 12px;
@@ -142,23 +157,12 @@ ul {
     margin: 0px 4px;
 }
 
-.list {
-    width: 272px;
-    background-color: #f1f2f4;
-    border-radius: 10px;
-    padding: 0px 8px 8px;
+.card-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
-header {
-    vertical-align: center;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 8px 8px;
-}
 
 
 .card {

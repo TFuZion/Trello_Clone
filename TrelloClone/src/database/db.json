@@ -75,27 +75,7 @@
   "lists": [
     {
       "id": "1",
-      "tableId": 1,
-      "name": "To do",
-      "cards": [
-        {
-          "name": "a",
-          "members": [
-            "Rémi Debruyne",
-            "Manu Max"
-          ]
-        },
-        {
-          "name": "b",
-          "members": [
-            "Manu Max"
-          ]
-        },
-        {
-          "id": "f192",
-          "name": "qsdqsd"
-        }
-      ]
+      "name": "List Name"
     },
     {
       "id": "2",
@@ -184,6 +164,10 @@
     {
       "id": "ed3b",
       "name": "test"
+    },
+    {
+      "id": "2e50",
+      "name": "qsd"
     }
   ],
   "tags": [
