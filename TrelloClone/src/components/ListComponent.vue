@@ -8,7 +8,7 @@ import { updateList } from '@/composables/ListRepository';
 import { List } from '@/Classes/List';
 const props = defineProps({
     list: {
-        type: List,
+        type: Object,
         default: {
             id: 1,
             name: "List Name",

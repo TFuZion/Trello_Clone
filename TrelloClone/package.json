@@ -15,7 +15,6 @@
     "json-server": "^1.0.0-beta.2",
     "pinia": "^2.1.7",
     "vee-validate": "^4.13.2",
-    "vee-validate": "^4.13.2",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3",
     "vuedraggable": "^4.1.0"

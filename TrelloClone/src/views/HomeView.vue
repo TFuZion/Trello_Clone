@@ -1,12 +1,7 @@
 <script setup>
 import TableComponent from '@/components/TableComponents/TableComponent.vue';
-import { onMounted, ref } from 'vue';
 import { getTableById } from '@/composables/tableComposables/useGetTable';
-let table = ref({});
-
-onMounted(async () => {
-  table.value = await getTableById(1)
-})
+const table = await getTableById(1)
 
 </script>
 
@@ -14,7 +9,8 @@ onMounted(async () => {
   <main>
     <div id="navbar"></div>
     <div id="table">
-      <TableComponent :table="table" />
+      <TableComponent :initialTable="table" />
+      <button @click="console.table(table.lists)">table from homeview</button>
     </div>
   </main>
 </template>
