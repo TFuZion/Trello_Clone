@@ -5,12 +5,10 @@ import ListNameInputComponent from './ListNameInputComponent.vue';
 import ProfilePictureComponent from '@/components/ProfilePictureComponent.vue';
 import draggable from 'vuedraggable'
 import { updateList } from '@/composables/ListRepository';
+import { List } from '@/Classes/List';
 const props = defineProps({
     list: {
-        name: String,
-        cards: [],
-        members: [],
-        type: Object,
+        type: List,
         default: {
             id: 1,
             name: "List Name",
@@ -27,6 +25,9 @@ const props = defineProps({
     }
 })
 
+const list = ref(props.list)
+
+// Define the type of modal to be opened
 const cardModal = "cardModal"
 const listNameModal = "listNameModal"
 
@@ -51,18 +52,15 @@ function closeModal() {
 //#endregion
 
 //#region EVENT HANDLING
-async function handleAddCard(value) {
-    const card = {
-        name: value,
-        members: []
-    }
-    props.list.cards.push(value)
-    const res = updateList(props.list.id, props.list)
-    list = res
+async function handleAddCard(card) {
+
+    list.value.cards.push(card)
+    const res = await updateList(list.value.id, list.value)
+    list.value = res
     closeModal();
 }
 
-function handleListNameChange(list) {
+function handleListNameChange(listFrominput) {
 
     props.list.name = list.name
     closeModal()

@@ -9,4 +9,9 @@ export class Card {
     comment;
     startDate;
     endDate;
+
+
+    constructor(name) {
+        this.name = name
+    }
 }
