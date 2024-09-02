@@ -1,26 +1,117 @@
 {
   "tables": [
-
-  ],
-  "lists": [
     {
-      "id": "1",
-      "name": "List Name",
-      "cards": [
+      "id": 1,
+      "name": "a",
+      "lists": [
         {
-          "name": "a",
-          "members": [
-            "Rémi Debruyne",
-            "Manu Max"
+          "id": 1,
+          "tableId": 1,
+          "name": "To do",
+          "cards": [
+            {
+              "name": "a",
+              "members": ["Rémi Debruyne", "Manu Max"]
+            },
+            {
+              "name": "b",
+              "members": ["Manu Max"]
+            }
           ]
         },
         {
-          "name": "c",
-          "members": [
-            "Manu Max"
+          "id": 2,
+          "tableId": 1,
+          "name": "On going",
+          "cards": [
+            {
+              "id": 3,
+              "name": "c",
+              "members": ["Rémi Debruyne", "Manu Max"]
+            },
+            {
+              "id": 4,
+              "name": "d",
+              "members": ["Manu Max"]
+            }
           ]
         }
+      ],
+      "tags": [
+        {
+          "id": "98e8",
+          "color": "#4bce97",
+          "content": "qsdqsd"
+        },
+        {
+          "id": "7063",
+          "color": "#ffd5d2",
+          "content": "dqsdqs"
+        },
+        {
+          "id": "fe86",
+          "color": "#f8e6a0",
+          "content": "dqsdsq"
+        }
       ]
+    }
+  ],
+  "lists": [
+    {
+      "id": 1,
+      "tableId": 1,
+      "name": "To do",
+      "cards": [
+        {
+          "name": "a",
+          "members": ["Rémi Debruyne", "Manu Max"]
+        },
+        {
+          "name": "b",
+          "members": ["Manu Max"]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "tableId": 1,
+      "name": "On going",
+      "cards": [
+        {
+          "id": 3,
+          "name": "c",
+          "members": ["Rémi Debruyne", "Manu Max"]
+        },
+        {
+          "id": 4,
+          "name": "d",
+          "members": ["Manu Max"]
+        }
+      ]
+    }
+  ],
+  "cards": [
+    {
+      "id": 1,
+      "name": "a",
+      "listId": 1,
+      "members": ["Rémi Debruyne", "Manu Max"]
+    },
+    {
+      "id": 2,
+      "name": "b",
+      "listId": 1,
+      "members": ["Manu Max"]
+    },
+    {
+      "id": 3,
+      "name": "c",
+      "members": ["Rémi Debruyne", "Manu Max"]
+    },
+    {
+      "id": 4,
+      "name": "d",
+      "members": ["Manu Max"]
     }
   ],
   "tags": [
@@ -49,5 +140,6 @@
       "color": "#f8e6a0",
       "content": "dsqdsq"
     }
-  ]
+  ],
+  "members": []
 }
