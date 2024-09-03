@@ -1,6 +1,5 @@
 <script setup>
-import { useCreateTable } from '@/composables/tableComposables/useCreateTable';
-import {ref} from 'vue'
+import { ref, watch } from 'vue'
 import { List } from '@/Classes/List';
 import { addList } from '@/composables/ListRepository';
 
@@ -11,6 +10,12 @@ const listName = ref('')
 const emit = defineEmits(['add-list', 'close'])
 
 async function handleSubmit() {
+
+    if (listName.value === '') {
+        isActive.value = false;
+        return;
+    }
+
     const table = new List(listName.value);
     const res = await addList(table);
     console.log(res);
@@ -20,14 +25,15 @@ async function handleSubmit() {
 }
 
 function handleClose() {
-    emit('close');
+    isActive.value = false;
 }
 
 
-function changeState(){
+function changeState() {
     isActive.value = true;
-    // DOMInput.value.focus();
 }
+
+
 
 </script>
 
@@ -55,7 +61,7 @@ function changeState(){
     font-weight: 700;
 }
 
-.create-button:hover{
+.create-button:hover {
     background-color: #ffffff28;
 }
 
