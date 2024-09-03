@@ -3,4 +3,9 @@ export class List {
     tableId;
     name;
     cards;
+
+    constructor(name){
+        this.name = name
+        this.cards = [];
+    }
 }

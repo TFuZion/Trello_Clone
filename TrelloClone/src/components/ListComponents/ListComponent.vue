@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue'
-import ListInputComponent from './ListInputComponent.vue';
+import AddCardComponent from './AddCardComponent.vue';
 import ListNameInputComponent from './ListNameInputComponent.vue';
-import ProfilePictureComponent from '@/components/ProfilePictureComponent.vue';
+import ProfilePictureComponent from '@/components/ListComponents/ProfilePictureComponent.vue';
 import draggable from 'vuedraggable'
 import { updateList } from '@/composables/ListRepository';
 import { List } from '@/Classes/List';
@@ -10,26 +10,29 @@ const props = defineProps({
     initialList: {
         type: List,
         default: {
-            "id": 1,
-            "tableId": 1,
-            "name": "To dooooooooooooooooooooooooooooooo",
-            "cards": [
+            id: 1,
+            tableId: 1,
+            name: "To dooooooooooooooooooooooooooooooo",
+            cards: [
                 {
-                    "name": "a",
-                    "members": [
-                        "Rémi Debruyne",
+                    id: 1,
+                    name: "a",
+                    members: [
+                       "Rémi Debruyne",
+                       "Manu Max"
+                    ]
+                },
+                {
+                    id: 2,
+                    name: "b",
+                    members: [
                         "Manu Max"
                     ]
                 },
                 {
-                    "name": "b",
-                    "members": [
-                        "Manu Max"
-                    ]
-                },
-                {
-                    "name": "test",
-                    "members": [
+                    id: 3,
+                    name: "test",
+                    members: [
                         "Manu Max"
                     ]
                 }
@@ -66,17 +69,34 @@ function closeModal() {
 
 //#region EVENT HANDLING
 async function handleAddCard(card) {
-
+    console.log();
+    
     list.value.cards.push(card)
+    // console.table(list.value);
+    // console.table(list.value.cards); 
+    console.log("list.value.id = ",list.value.id);
+    console.log("list.value = ",list.value);
+    
+    
     const res = await updateList(list.value.id, list.value)
+    console.log("This is response from updateList() : ", res);
+    console.table( res);
+    
     list.value = res
     closeModal();
 }
 
 function handleListNameChange(listFrominput) {
-
     list.value = listFrominput;
     closeModal()
+}
+
+async function handleChange(){
+    const res = await updateList(list.value.id, list.value)
+    console.log(res);
+    
+    list.value = res;
+    
 }
 //#endregion
 </script>
@@ -93,7 +113,7 @@ function handleListNameChange(listFrominput) {
                 :initial-list="list" />
             <button @click="$emit('delete')" class="delete-button">X</button>
         </header>
-        <draggable :list="list.cards" group="cards" item-key="id" tag="div" class="card-container">
+        <draggable :list="list.cards" group="cards" item-key="id" tag="div" @change="handleChange" class="card-container">
             <template #item="{ element, index }">
                 <div class="card">
                     {{ element.name }}
@@ -106,11 +126,11 @@ function handleListNameChange(listFrominput) {
         </draggable>
         <!-- Display a button to add a card or an input to add a card -->
         <div v-if="!isAddingCard">
-            <button @click="openModal(cardModal)" class="add-card-button">+ Ajouter une carte</button>
+            <button @click="openModal(cardModal)" class="add-card-button">+ Add a new card</button>
         </div>
         <div v-else="isAddingCard">
             <!-- Decomposed ListComponent into sub component to not overcrowed it with logic -->
-            <ListInputComponent @add-card="handleAddCard" @close="closeModal()" />
+            <AddCardComponent @add-card="handleAddCard" @close="closeModal()" />
         </div>
     </section>
 </template>
@@ -127,7 +147,6 @@ function handleListNameChange(listFrominput) {
     padding: 0px 8px 8px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
     background-color: #f1f2f4;
     height: fit-content;
 }
@@ -151,6 +170,7 @@ h2 {
     font-size: 14px;
     margin: 0;
     padding: 6px 8px 6px 12px;
+    font-weight: 500;
 }
 
 .delete-button {
@@ -175,6 +195,7 @@ ul {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    margin-bottom: 10px;
 }
 
 
@@ -187,6 +208,7 @@ ul {
     border-radius: 8px;
     min-height: 36px;
     padding: 8px 12px 12px;
+
 }
 
 .profile-picture {
@@ -196,7 +218,7 @@ ul {
 }
 
 .card:hover {
-    box-shadow: 0px 0px 0px 1.5px rgb(1, 145, 255);
+    box-shadow: 0px 0px 0px 1.5px #0191ff;
 }
 
 .button-container {
@@ -205,7 +227,6 @@ ul {
 }
 
 .add-card-button {
-    margin-top: 10px;
     width: 100%;
     border-radius: 8px;
     padding: 6px 12px 6px 8px;

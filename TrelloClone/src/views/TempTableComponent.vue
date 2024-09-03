@@ -1,6 +1,6 @@
 <script setup>
 import draggable from 'vuedraggable'
-import ListComponent from '@/components/ListComponent.vue';
+import ListComponent from '@/components/ListComponents/ListComponent.vue';
 import { ref } from 'vue'
 
 let lists = ref([{

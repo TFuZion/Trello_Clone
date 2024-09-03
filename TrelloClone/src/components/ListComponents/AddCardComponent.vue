@@ -15,14 +15,13 @@ async function handleSubmit() {
     }
     const card = new Card(cardName.value)
     const res = await addCard(card)
-    
     emit('add-card', res)
     cardName.value = '';
 }
 
 function handleClose() {
-    emit('close');
     cardName.value = '';
+    emit('close');
 }
 
 onMounted(() => {

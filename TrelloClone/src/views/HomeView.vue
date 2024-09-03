@@ -17,14 +17,16 @@ const table = await getTableById(1)
 <style scoped>
 main {
   display: flex;
+  height: 100vh;
+  width: 100vw;
 }
 
 #navbar {
-  width: 20%;
+  width: 15%;
+  background: #b4b4b4;
 }
 
 #table {
   display: flex;
-  width: 80%;
 }
 </style>

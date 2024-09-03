@@ -4,4 +4,9 @@ export class Table {
     lists;
     tags;
 
+    constructor(name) {
+        this.name = name
+        this.lists = [];
+        this.tags = [];
+    }
 }
