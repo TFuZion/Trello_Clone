@@ -1,37 +1,61 @@
 <script setup>
 import { updateList } from '@/composables/ListRepository';
 import { onMounted, ref } from 'vue'
+import { List } from '@/Classes/List';
 const props = defineProps({
-    list: {
-        type: Object,
-        id: null,
-        name: String,
+    initialList: {
+        type: List,
         default: {
-            id: 1,
-            name: 'List Name'
+            "id": 1,
+            "tableId": 1,
+            "name": "To dooooooooooooooooooooooooooooooo",
+            "cards": [
+                {
+                    "name": "a",
+                    "members": [
+                        "Rémi Debruyne",
+                        "Manu Max"
+                    ]
+                },
+                {
+                    "name": "b",
+                    "members": [
+                        "Manu Max"
+                    ]
+                },
+                {
+                    "name": "test",
+                    "members": [
+                        "Manu Max"
+                    ]
+                }
+            ]
         }
     }
 })
+
+const list = ref(props.initialList)
 // DOMInput = document.getElementById... This is needed to force focus on the input when it is displayed
 const DOMInput = ref(null);
-const listName = ref('');
+// const listNameInput = ref('');
 const emit = defineEmits(['list-name-change', 'close'])
 
 async function handleSubmit() {
-    if (props.list.name === '') {
+    if (list.value.name === '') {
         handleClose();
         return
     }
-    // const listNameToSend = listName.value
-    const res = await updateList(props.list.id, props.list)
+    console.log(list.value);
+    
+    const res = await updateList(list.value.id, list.value)
     console.log(res);
     emit('list-name-change', res)
-    listName.value = '';
+    list.value.name = '';
 }
 
 function handleClose() {
     emit('close');
-    listName.value = '';
+    list.value.name = '';
 }
 
 onMounted(() => {

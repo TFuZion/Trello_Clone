@@ -7,25 +7,38 @@ import draggable from 'vuedraggable'
 import { updateList } from '@/composables/ListRepository';
 import { List } from '@/Classes/List';
 const props = defineProps({
-    list: {
+    initialList: {
         type: List,
         default: {
-            id: 1,
-            name: "List Name",
-            cards: [{
-                name: "a",
-                members: ['Rémi Debruyne', 'Manu Max']
-            },
-            {
-                name: "c",
-                members: ['Manu Max']
-            }
-            ],
+            "id": 1,
+            "tableId": 1,
+            "name": "To dooooooooooooooooooooooooooooooo",
+            "cards": [
+                {
+                    "name": "a",
+                    "members": [
+                        "Rémi Debruyne",
+                        "Manu Max"
+                    ]
+                },
+                {
+                    "name": "b",
+                    "members": [
+                        "Manu Max"
+                    ]
+                },
+                {
+                    "name": "test",
+                    "members": [
+                        "Manu Max"
+                    ]
+                }
+            ]
         }
     }
 })
 
-const list = ref(props.list)
+const list = ref(props.initialList)
 
 // Define the type of modal to be opened
 const cardModal = "cardModal"
@@ -62,7 +75,7 @@ async function handleAddCard(card) {
 
 function handleListNameChange(listFrominput) {
 
-    props.list.name = list.name
+    list.value = listFrominput;
     closeModal()
 }
 //#endregion
@@ -71,13 +84,13 @@ function handleListNameChange(listFrominput) {
 <template>
     <section class="list">
         <header class="list-name" @click="openModal(listNameModal)">
-                <!-- Display the name or an input to change it -->
-                <h2 v-if="!isUpdatingListName">
-                    {{ list.name }}
-                </h2>
-                <!-- Decomposed ListComponent into sub component to not overcrowed it with logic -->
-                <ListNameInputComponent v-else @list-name-change="handleListNameChange" @close="closeModal()"
-                    :list-name-props="list.name" />
+            <!-- Display the name or an input to change it -->
+            <h2 v-if="!isUpdatingListName">
+                {{ list.name }}
+            </h2>
+            <!-- Decomposed ListComponent into sub component to not overcrowed parent with logic -->
+            <ListNameInputComponent v-else @list-name-change="handleListNameChange" @close="closeModal()"
+                :initial-list="list" />
             <button @click="$emit('delete')" class="delete-button">X</button>
         </header>
         <draggable :list="list.cards" group="cards" item-key="id" tag="div" class="card-container">
@@ -132,6 +145,7 @@ header {
     overflow-wrap: break-word;
 
 }
+
 h2 {
     width: 80%;
     font-size: 14px;

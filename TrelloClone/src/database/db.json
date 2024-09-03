@@ -7,7 +7,7 @@
         {
           "id": 1,
           "tableId": 1,
-          "name": "To dooooooooooooooooooooooooooooooo",
+          "name": "To do",
           "cards": [
             {
               "name": "a",
@@ -75,7 +75,29 @@
   "lists": [
     {
       "id": "1",
-      "name": "List Name"
+      "tableId": 1,
+      "name": "To do",
+      "cards": [
+        {
+          "name": "a",
+          "members": [
+            "Rémi Debruyne",
+            "Manu Max"
+          ]
+        },
+        {
+          "name": "b",
+          "members": [
+            "Manu Max"
+          ]
+        },
+        {
+          "name": "test",
+          "members": [
+            "Manu Max"
+          ]
+        }
+      ]
     },
     {
       "id": "2",

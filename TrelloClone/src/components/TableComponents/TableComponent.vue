@@ -72,9 +72,9 @@ const table = ref(props.initialTable)
 
 <template>
   <section id="table-container">
-      <draggableComponent :list="table.lists" item-key="id" group="list" tag="section" class="grid">
-        <template #item="{element}">
-          <ListComponent  :list="element"/>
+    <draggableComponent :list="table.lists" item-key="id" group="list" tag="section" class="grid">
+      <template #item="{element}">
+          <ListComponent  :initialList="element"/>
         </template>
       </draggableComponent>
     <div id="addList">
