@@ -20,7 +20,5 @@ import { Suspense } from "vue";
 </template>
 
 <style scoped>
-body {
-  margin: 0;
-}
+
 </style>

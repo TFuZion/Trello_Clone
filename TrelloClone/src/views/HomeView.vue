@@ -16,13 +16,13 @@ const table = await getTableById(1)
 
 <style scoped>
 main {
-  display: flex;
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 260px auto;
   height: 100vh;
-  width: 100vw;
 }
 
 #navbar {
-  width: 15%;
   background: #b4b4b4;
 }
 
