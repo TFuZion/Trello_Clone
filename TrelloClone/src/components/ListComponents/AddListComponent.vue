@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from 'vue'
+import {  ref, watch } from 'vue'
 import { List } from '@/Classes/List';
 import { addList } from '@/composables/ListRepository';
 
@@ -34,7 +34,11 @@ function changeState() {
 }
 
 
-
+watch(DOMInput, () => {
+    if(DOMInput.value){
+        DOMInput.value.focus();
+    }
+})
 </script>
 
 <template>
