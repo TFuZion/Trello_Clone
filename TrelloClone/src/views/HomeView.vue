@@ -1,6 +1,8 @@
 <script setup>
 import TableComponent from '@/components/TableComponents/TableComponent.vue';
 import { getTableById } from '@/composables/tableComposables/useGetTable';
+
+
 const table = await getTableById(1)
 
 </script>
