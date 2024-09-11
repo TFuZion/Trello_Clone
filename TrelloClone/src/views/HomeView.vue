@@ -1,31 +1,36 @@
 <script setup>
 import TableComponent from '@/components/TableComponents/TableComponent.vue';
 import { getTableById } from '@/composables/tableComposables/useGetTable';
-import { useTables } from '@/composables/tableComposables/useTable';
 import NavbarComponent from '@/components/NavbarComponent.vue';
 import { getTable } from '@/composables/tableComposables/getTable';
-import { onMounted } from 'vue';
+import { ref } from 'vue';
 
-// const tables = await getTable();
-const { tables } = useTables()
-const table = await getTableById(1)
+// fetch all the tables from the db
+const tables = await getTable();
 
-onMounted(() => {
-  console.log("onmounted in homeview");
-  console.log(tables.value);
+// serve as the default table to be used
+const table = await getTableById(2)
+const selectedTable = ref(table);
 
-})
+function handleSelectTable(tableToSelect){
+  console.log('tableToSelect = ');
+  console.table(tableToSelect)
+  
+  selectedTable.value = tableToSelect;
+  
+  console.log(selectedTable.value);
+  
+}
 
 </script>
 
 <template>
   <main>
     <div>
-      <p v-for="(table, index) in tables" :key="index">{{ table.name }}</p>
-      <NavbarComponent :initialTables="tables" />
+      <NavbarComponent :initial-tables="tables" @select-table="handleSelectTable" />
     </div>
     <div id="table">
-      <TableComponent :initialTable="table" />
+      <TableComponent :initial-table="selectedTable" />
     </div>
   </main>
 </template>
@@ -42,4 +47,6 @@ main {
 #table {
   display: flex;
 }
+
+
 </style>

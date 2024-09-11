@@ -75,13 +75,13 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Second table",
       "lists": [
         {
           "id": 1,
           "tableId": 1,
-          "name": "To do",
+          "name": "To do from second table",
           "cards": [
             {
               "id": 3,
@@ -94,7 +94,7 @@
               "id": 1,
               "name": "a",
               "members": [
-                "Rémi Debruyne",
+                "Jean Valjean",
                 "Manu Max"
               ]
             },
@@ -110,7 +110,7 @@
         {
           "id": 2,
           "tableId": 1,
-          "name": "On going",
+          "name": "On going from second table",
           "cards": [
             {
               "id": 4,
@@ -153,26 +153,26 @@
     {
       "id": "1",
       "tableId": 1,
-      "name": "To do",
+      "name": "To do from second table",
       "cards": [
+        {
+          "id": 2,
+          "name": "b",
+          "members": [
+            "Manu Max"
+          ]
+        },
         {
           "id": 1,
           "name": "a",
           "members": [
-            "Rémi Debruyne",
+            "Jean Valjean",
             "Manu Max"
           ]
         },
         {
           "id": 3,
           "name": "test",
-          "members": [
-            "Manu Max"
-          ]
-        },
-        {
-          "id": 2,
-          "name": "b",
           "members": [
             "Manu Max"
           ]

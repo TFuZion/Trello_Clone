@@ -8,7 +8,7 @@ import { updateList } from '@/composables/ListRepository';
 import { List } from '@/Classes/List';
 const props = defineProps({
     initialList: {
-        type: List,
+        type: Object,
         default: {
             id: 1,
             tableId: 1,
@@ -38,7 +38,7 @@ const props = defineProps({
                 }
             ]
         }
-    }
+    },
 })
 
 const list = ref(props.initialList)
@@ -66,14 +66,13 @@ function closeModal() {
     isUpdatingListName.value = false;
 }
 //#endregion
-
+ 
 //#region EVENT HANDLING
 async function handleAddCard(card) {
     console.log();
     
     list.value.cards.push(card)
-    // console.table(list.value);
-    // console.table(list.value.cards); 
+
     console.log("list.value.id = ",list.value.id);
     console.log("list.value = ",list.value);
     
@@ -100,7 +99,6 @@ async function handleChange(){
 }
 //#endregion
 </script>
-
 <template>
     <section class="list">
         <header class="list-name" @click="openModal(listNameModal)">
