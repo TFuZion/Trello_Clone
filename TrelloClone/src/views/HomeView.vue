@@ -3,7 +3,8 @@ import TableComponent from '@/components/TableComponents/TableComponent.vue';
 import { getTableById } from '@/composables/tableComposables/useGetTable';
 import NavbarComponent from '@/components/NavbarComponent.vue';
 import { getTable } from '@/composables/tableComposables/getTable';
-import { ref } from 'vue';
+import { getCurrentInstance, ref } from 'vue';
+
 
 // fetch all the tables from the db
 const tables = await getTable();
@@ -12,14 +13,13 @@ const tables = await getTable();
 const table = await getTableById(2)
 const selectedTable = ref(table);
 
+// Not sure aobut this technique to force reload the component
+// Without this, when the selected table changes, TableComponent doesn't reload and the table stays the same
+const componentKey = ref(0)
+
 function handleSelectTable(tableToSelect){
-  console.log('tableToSelect = ');
-  console.table(tableToSelect)
-  
   selectedTable.value = tableToSelect;
-  
-  console.log(selectedTable.value);
-  
+  componentKey.value += 1;
 }
 
 </script>
@@ -30,7 +30,7 @@ function handleSelectTable(tableToSelect){
       <NavbarComponent :initial-tables="tables" @select-table="handleSelectTable" />
     </div>
     <div id="table">
-      <TableComponent :initial-table="selectedTable" />
+      <TableComponent :initial-table="selectedTable" :key="componentKey"/>
     </div>
   </main>
 </template>

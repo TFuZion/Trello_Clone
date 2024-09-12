@@ -27,7 +27,11 @@ function test() {
 }
 
 function clickOnTable(table){
-    emit('select-table', table)
+ try {
+     emit('select-table', table)
+ } catch (error) {
+    console.log(error)
+ }
 }
 
 </script>
