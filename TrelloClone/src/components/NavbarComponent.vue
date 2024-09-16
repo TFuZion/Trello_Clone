@@ -10,23 +10,6 @@ const emit = defineEmits(['select-table'])
 
 const tables = ref(props.initialTables)
 
-function test() {
-    console.log("props :");
-    console.log(props.initialTables);
-
-    console.log("props.initialTables is type of : ", typeof props.initialTables);
-
-
-    console.log("ref raw :");
-    console.table(tables)
-
-    console.log("ref.value :");
-    console.table(tables.value)
-    console.log("tables.value is an array ?: ", Array.isArray(tables.value), " it is an : ", typeof tables.value);
-    console.log("ref length");
-    console.table(tables.value.length)
-}
-
 function clickOnTable(table){
  try {
      emit('select-table', table)
