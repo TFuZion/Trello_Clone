@@ -19,6 +19,4 @@ import { Suspense } from "vue";
 
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

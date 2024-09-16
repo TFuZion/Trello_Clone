@@ -2,7 +2,7 @@ import axios from "axios";
 import { onMounted, ref } from "vue";
 
 export const useTables =  () => {
-  const PATH_API = "http://localhost:3000/tables/";
+  const PATH_API = import.meta.env.VITE_APP_DB_URL;
   const tables = ref(null);
   const load = async() => {
     try {
@@ -12,9 +12,9 @@ export const useTables =  () => {
       console.error(e);
     }
   }
-  onMounted(() => {
-    load();
-  });
+  // onMounted(() => {
+  //   load();
+  // });
 
   return {tables, load}
 }

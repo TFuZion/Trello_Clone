@@ -10,23 +10,6 @@ const emit = defineEmits(['select-table'])
 
 const tables = ref(props.initialTables)
 
-function test() {
-    console.log("props :");
-    console.log(props.initialTables);
-
-    console.log("props.initialTables is type of : ", typeof props.initialTables);
-
-
-    console.log("ref raw :");
-    console.table(tables)
-
-    console.log("ref.value :");
-    console.table(tables.value)
-    console.log("tables.value is an array ?: ", Array.isArray(tables.value), " it is an : ", typeof tables.value);
-    console.log("ref length");
-    console.table(tables.value.length)
-}
-
 function clickOnTable(table){
  try {
      emit('select-table', table)
@@ -43,9 +26,8 @@ function clickOnTable(table){
             <h2>Your workspaces</h2>
             <AddTableComponent/>
         </div>
-        <!-- <button @click="test" class="test-button">test</button> -->
          <div class="table-container">
-             <button v-for="(table, index) in tables" :key="index" @click="clickOnTable(table)">{{ table.name }}</button>
+             <button v-for="(table, index) in tables" :key="index" @click="clickOnTable(table)">{{ table.tableName }}</button>
          </div>
     </section>
 </template>
