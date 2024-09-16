@@ -147,6 +147,21 @@
           "content": "dqsdsq"
         }
       ]
+    },
+    {
+      "id": "0823",
+      "name": "iuhui",
+      "background": "@/assets/backgroundTableImg/ice.svg"
+    },
+    {
+      "id": "5bb3",
+      "name": "sqdsqd",
+      "background": "../../assets/backgroundTableImg/sun.svg"
+    },
+    {
+      "id": "e387",
+      "name": "zaezae",
+      "background": "../../assets/backgroundTableImg/crystal.svg"
     }
   ],
   "lists": [
@@ -257,6 +272,11 @@
     {
       "id": "ef40",
       "name": "aze",
+      "cards": []
+    },
+    {
+      "id": "3da1",
+      "name": "qdsqd",
       "cards": []
     }
   ],

@@ -6,7 +6,7 @@ import TempTableComponent from '@/views/TempTableComponent.vue';
 import TagComponent from '@/components/TagsComponents/TagComponent.vue';
 import TagSelectorComponent from '@/components/TagsComponents/TagComponent.vue';
 import TagCreatorComponent from '@/components/TagsComponents/TagCreatorComponent.vue';
-import AddTable from '@/components/TableComponents/AddTable.vue';
+import AddTable from '@/components/TableComponents/AddTableComponent.vue';
 import FilterCard from '@/components/TableComponents/FilterCard.vue';
 import TestNav from '@/components/TestNav.vue';
 

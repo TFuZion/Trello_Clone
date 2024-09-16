@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+import AddTableComponent from './TableComponents/AddTableComponent.vue';
 
 const props = defineProps({
     initialTables: Array
@@ -40,7 +41,7 @@ function clickOnTable(table){
     <section class="navbar">
         <div class="header">
             <h2>Your workspaces</h2>
-            <button>+</button>
+            <AddTableComponent/>
         </div>
         <!-- <button @click="test" class="test-button">test</button> -->
          <div class="table-container">
@@ -58,6 +59,7 @@ function clickOnTable(table){
 
 .header {
     display: flex;
+    align-items: center;
     gap: 1rem;
     margin-bottom: 0.5rem;
 }

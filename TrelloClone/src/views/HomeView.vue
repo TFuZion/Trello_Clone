@@ -3,7 +3,7 @@ import TableComponent from '@/components/TableComponents/TableComponent.vue';
 import { getTableById } from '@/composables/tableComposables/useGetTable';
 import NavbarComponent from '@/components/NavbarComponent.vue';
 import { getTable } from '@/composables/tableComposables/getTable';
-import { getCurrentInstance, ref } from 'vue';
+import { ref } from 'vue';
 
 
 // fetch all the tables from the db
@@ -17,7 +17,7 @@ const selectedTable = ref(table);
 // Without this, when the selected table changes, TableComponent doesn't reload and the table stays the same
 const componentKey = ref(0)
 
-function handleSelectTable(tableToSelect){
+function handleSelectTable(tableToSelect) {
   selectedTable.value = tableToSelect;
   componentKey.value += 1;
 }
@@ -30,7 +30,7 @@ function handleSelectTable(tableToSelect){
       <NavbarComponent :initial-tables="tables" @select-table="handleSelectTable" />
     </div>
     <div id="table">
-      <TableComponent :initial-table="selectedTable" :key="componentKey"/>
+      <TableComponent :initial-table="selectedTable" :key="componentKey" />
     </div>
   </main>
 </template>
@@ -47,6 +47,4 @@ main {
 #table {
   display: flex;
 }
-
-
 </style>

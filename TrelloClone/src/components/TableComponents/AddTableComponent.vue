@@ -1,15 +1,13 @@
 <script setup>
-import { Form, Field } from "vee-validate";
 import { ref } from "vue";
 import { useCreateTable } from "@/composables/tableComposables/useCreateTable";
 import { useTables } from "@/composables/tableComposables/useTable";
 
-const PATH_BACKGROUND = "@/assets/backgroundTableImg/";
-const classBackgroudTableImg = ref("a");
+const PATH_BACKGROUND = "../../assets/backgroundTableImg/";
+const classBackgroudTableImg = ref("c");
 const nameTable = ref("");
 const { load } = useTables();
 const { createTable } = useCreateTable();
-
 const handleCreateTable = async () => {
   const table = {};
   console.log(nameTable.value);
@@ -50,80 +48,75 @@ const handleCreateTable = async () => {
   load();
   console.log(table);
 };
+
+const isOpen = ref(false)
+
+function setBackground(value){  
+  classBackgroudTableImg.value = value
+}
+
 </script>
 
 <template>
-  <section id="add-table">
+  <button @click="isOpen = !isOpen" class="modal-button">+</button>
+  <section v-if="isOpen" id="add-table">
     <header>
       <h5>Créer un tableau</h5>
-      <button>
-        <span
-          ><svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+      <button @click="isOpen = false">
+        <span><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd"
               d="M10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12Z"
-              fill="currentColor"
-            ></path></svg
-        ></span>
+              fill="currentColor"></path>
+          </svg></span>
       </button>
     </header>
     <div id="add-table-container">
       <hr />
       <div class="previsualisation">
         <div class="backgroundTableImg" :class="classBackgroudTableImg">
-          <img
-            src="../assets/backgroudTableImg/modelTable.svg"
-            alt="presentation"
-          />
+          <img src="../../assets/backgroudTableImg/modelTable.svg" alt="presentation" />
         </div>
       </div>
       <div>
         <p>Fond d'écran</p>
         <div id="grid-select-background">
           <ul>
-            <li>
-              <button @click="classBackgroudTableImg = 'a'"></button>
+            <li @click="setBackground('a')">
+              <button></button>
               <div></div>
             </li>
-            <li>
-              <button @click="classBackgroudTableImg = 'b'"></button>
+            <li @click="setBackground('b')">
+              <button></button>
               <div></div>
             </li>
-            <li>
-              <button @click="classBackgroudTableImg = 'c'"></button>
+            <li @click="setBackground('c')">
+              <button></button>
               <div>
                 <span></span>
               </div>
             </li>
-            <li>
-              <button @click="classBackgroudTableImg = 'd'"></button>
+            <li @click="setBackground('d')">
+              <button></button>
               <div></div>
             </li>
-            <li>
-              <button @click="classBackgroudTableImg = 'e'"></button>
+            <li @click="setBackground('e')">
+              <button></button>
               <div></div>
             </li>
-            <li>
-              <button @click="classBackgroudTableImg = 'f'"></button>
+            <li @click="setBackground('f')">
+              <button></button>
               <div></div>
             </li>
-            <li>
-              <button @click="classBackgroudTableImg = 'g'"></button>
+            <li @click="setBackground('g')">
+              <button></button>
               <div></div>
             </li>
-            <li>
-              <button @click="classBackgroudTableImg = 'h'"></button>
+            <li @click="setBackground('h')">
+              <button></button>
               <div></div>
             </li>
-            <li>
-              <button @click="classBackgroudTableImg = 'i'"></button>
+            <li @click="setBackground('i')">
+              <button></button>
               <div></div>
             </li>
           </ul>
@@ -164,6 +157,7 @@ const handleCreateTable = async () => {
   background-color: #ffffff;
   box-shadow: 0px 8px 12px #091e4226, 0px 0px 1px #091e424f;
 }
+
 h5 {
   display: block;
   position: relative;
@@ -181,6 +175,21 @@ h5 {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.modal-button {
+  width: 32px;
+  height: 32px;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: none;
+}
+
+button:hover {
+  background-color: #091e4224;
+  cursor: pointer;
+}
+
+
 header {
   display: grid;
   position: relative;
@@ -188,6 +197,7 @@ header {
   align-items: center;
   padding: 4px 8px;
   text-align: center;
+
   button {
     grid-column: 3;
     grid-row: 1;
@@ -202,6 +212,7 @@ header {
     background: transparent;
     cursor: pointer;
   }
+
   button:hover,
   button:active {
     background-color: #091e4224;
@@ -215,6 +226,7 @@ header {
   overflow-x: hidden;
   overflow-y: auto;
 }
+
 hr {
   background-color: #091e4224;
   border: 0;
@@ -223,38 +235,49 @@ hr {
   padding: 0;
   width: 100%;
 }
+
 .previsualisation {
   display: flex;
   justify-content: center;
   padding-bottom: 8px;
 }
+
 .a {
-  background-image: url("../assets/backgroudTableImg/ice.svg");
+  background-image: url("../../assets/backgroudTableImg/ice.svg");
 }
+
 .b {
-  background-image: url("../assets/backgroudTableImg/ocean.svg");
+  background-image: url("../../assets/backgroudTableImg/ocean.svg");
 }
+
 .c {
-  background-image: url("../assets/backgroudTableImg/crystal.svg");
+  background-image: url("../../assets/backgroudTableImg/crystal.svg");
 }
+
 .d {
-  background-image: url("../assets/backgroudTableImg/rainbow.svg");
+  background-image: url("../../assets/backgroudTableImg/rainbow.svg");
 }
+
 .e {
-  background-image: url("../assets/backgroudTableImg/sun.svg");
+  background-image: url("../../assets/backgroudTableImg/sun.svg");
 }
+
 .f {
-  background-image: url("../assets/backgroudTableImg/flower.svg");
+  background-image: url("../../assets/backgroudTableImg/flower.svg");
 }
+
 .g {
-  background-image: url("../assets/backgroudTableImg/earth.svg");
+  background-image: url("../../assets/backgroudTableImg/earth.svg");
 }
+
 .h {
-  background-image: url("../assets/backgroudTableImg/alien.svg");
+  background-image: url("../../assets/backgroudTableImg/alien.svg");
 }
+
 .i {
-  background-image: url("../assets/backgroudTableImg/volcano.svg");
+  background-image: url("../../assets/backgroudTableImg/volcano.svg");
 }
+
 .backgroundTableImg {
   display: flex;
   align-items: center;
@@ -266,6 +289,7 @@ hr {
   background-size: cover;
   box-shadow: 0px 1px 1px #091e4240;
 }
+
 p {
   color: #44546f;
   display: block;
@@ -279,17 +303,20 @@ p {
 #grid-select-background {
   display: block;
   padding-bottom: 4px;
-  > ul {
+
+  >ul {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 5px;
-    > li {
+
+    >li {
       width: 100%;
       height: 50px;
       position: relative;
-      > button {
+
+      >button {
         display: flex;
         position: relative;
         align-items: center;
@@ -309,7 +336,8 @@ p {
         line-height: 0;
         cursor: pointer;
       }
-      > div {
+
+      >div {
         width: 100%;
         height: 100%;
         background-color: black;
@@ -319,60 +347,70 @@ p {
         opacity: 0;
         transition: opacity 200ms ease;
       }
-      > div:hover {
+
+      >div:hover {
         opacity: 0.3;
       }
     }
   }
 }
+
 li:nth-child(1) {
-  > button {
-    background-image: url("../assets/backgroudTableImg/ice.svg");
+  >button {
+    background-image: url("../../assets/backgroudTableImg/ice.svg");
   }
 }
+
 li:nth-child(2) {
-  > button {
-    background-image: url("../assets/backgroudTableImg/ocean.svg");
+  >button {
+    background-image: url("../../assets/backgroudTableImg/ocean.svg");
   }
 }
+
 li:nth-child(3) {
-  > button {
-    background-image: url("../assets/backgroudTableImg/crystal.svg");
+  >button {
+    background-image: url("../../assets/backgroudTableImg/crystal.svg");
   }
 }
+
 li:nth-child(4) {
-  > button {
-    background-image: url("../assets/backgroudTableImg/rainbow.svg");
+  >button {
+    background-image: url("../../assets/backgroudTableImg/rainbow.svg");
   }
 }
+
 li:nth-child(5) {
-  > button {
-    background-image: url("../assets/backgroudTableImg/sun.svg");
+  >button {
+    background-image: url("../../assets/backgroudTableImg/sun.svg");
   }
 }
+
 li:nth-child(6) {
-  > button {
-    background-image: url("../assets/backgroudTableImg/flower.svg");
+  >button {
+    background-image: url("../../assets/backgroudTableImg/flower.svg");
   }
 }
+
 li:nth-child(7) {
-  > button {
-    background-image: url("../assets/backgroudTableImg/earth.svg");
+  >button {
+    background-image: url("../../assets/backgroudTableImg/earth.svg");
   }
 }
+
 li:nth-child(8) {
-  > button {
-    background-image: url("../assets/backgroudTableImg/alien.svg");
+  >button {
+    background-image: url("../../assets/backgroudTableImg/alien.svg");
   }
 }
+
 li:nth-child(9) {
-  > button {
-    background-image: url("../assets/backgroudTableImg/volcano.svg");
+  >button {
+    background-image: url("../../assets/backgroudTableImg/volcano.svg");
   }
 }
 
 #form-add-table {
-  > button {
+  >button {
     width: 100%;
     margin: 16px 0 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
@@ -399,7 +437,8 @@ li:nth-child(9) {
     transition-duration: 85ms;
     transition-timing-function: ease;
   }
-  > button:disabled {
+
+  >button:disabled {
     border: none;
     background-color: var(--ds-background-disabled, #091e4208);
     box-shadow: none;
@@ -407,6 +446,7 @@ li:nth-child(9) {
     cursor: not-allowed;
   }
 }
+
 #title-table {
   color: #44546f;
   font-size: 12px;
@@ -415,6 +455,7 @@ li:nth-child(9) {
   margin-top: 12px;
   margin-bottom: 2px;
 }
+
 .red {
   color: #e34935;
   margin-left: 2px;
@@ -422,6 +463,7 @@ li:nth-child(9) {
   font-weight: 700;
   line-height: 16px;
 }
+
 input {
   border: none;
   outline: none;
@@ -442,6 +484,7 @@ input {
   width: 100%;
   margin-bottom: 4px;
 }
+
 #input-empty {
   display: flex;
   flex-direction: row;
@@ -451,10 +494,12 @@ input {
   font-size: 14px;
   font-weight: 400;
   line-height: 20px;
-  > p {
+
+  >p {
     margin: 0 0 8px;
   }
-  > span {
+
+  >span {
     margin-right: 8px;
   }
 }
