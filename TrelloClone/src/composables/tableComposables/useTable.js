@@ -1,7 +1,7 @@
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
-export const useTables = () => {
+export const useTables =  () => {
   const PATH_API = "http://localhost:3000/tables/";
   const tables = ref(null);
   const load = async() => {

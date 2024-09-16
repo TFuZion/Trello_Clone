@@ -1,5 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
+import { addCard } from '@/composables/cardRepository/CardRepository';
+import { Card } from '@/Classes/Card';
 
 // DOMInput = document.getElementById... This is needed to force focus on the input when it is displayed
 const DOMInput = ref(null)
@@ -11,16 +13,15 @@ async function handleSubmit() {
         handleClose();
         return
     }
-    const cardNameToSend = cardName.value
-    // TODO implement addCard()
-    const res = await addCard(cardNameToSend)
+    const card = new Card(cardName.value)
+    const res = await addCard(card)
     emit('add-card', res)
     cardName.value = '';
 }
 
 function handleClose() {
-    emit('close');
     cardName.value = '';
+    emit('close');
 }
 
 onMounted(() => {

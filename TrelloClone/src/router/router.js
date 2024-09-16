@@ -1,13 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import CardView from '../views/CardView.vue';
-import ListComponent from '@/components/ListComponent.vue';
+import ListComponent from '@/components/ListComponents/ListComponent.vue';
 import TempTableComponent from '@/views/TempTableComponent.vue';
 import TagComponent from '@/components/TagsComponents/TagComponent.vue';
 import TagSelectorComponent from '@/components/TagsComponents/TagComponent.vue';
 import TagCreatorComponent from '@/components/TagsComponents/TagCreatorComponent.vue';
-import AddTable from '@/components/TableComponents/AddTable.vue';
+import AddTable from '@/components/TableComponents/AddTableComponent.vue';
 import FilterCard from '@/components/TableComponents/FilterCard.vue';
+import TestNav from '@/components/TestNav.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
