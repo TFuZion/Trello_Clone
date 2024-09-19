@@ -5,7 +5,7 @@ export const useCreateTable = () => {
   
   const createTable = async(table) => {
     try {
-      const res = await axios.post(PATH_API, table)
+      const res = await axios.post(PATH_API + 'tables/create', table)
       return res.data
     } catch (error) {
       console.error(error);

@@ -12,7 +12,7 @@ const props = defineProps({
         default: {
             id: 1,
             tableId: 1,
-            name: "To dooooooooooooooooooooooooooooooo",
+            name: "To do",
             cards: [
                 {
                     id: 1,
@@ -104,7 +104,7 @@ async function handleChange(){
         <header class="list-name" @click="openModal(listNameModal)">
             <!-- Display the name or an input to change it -->
             <h2 v-if="!isUpdatingListName">
-                {{ list.listName }}
+                {{ list.name }}
             </h2>
             <!-- Decomposed ListComponent into sub component to not overcrowed parent with logic -->
             <ListNameInputComponent v-else @list-name-change="handleListNameChange" @close="closeModal()"

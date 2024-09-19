@@ -18,16 +18,20 @@ function clickOnTable(table){
  }
 }
 
+function handleTableCreation(value){
+    tables.value.push(value);
+}
+
 </script>
 
 <template>
     <section class="navbar">
         <div class="header">
             <h2>Your workspaces</h2>
-            <AddTableComponent/>
+            <AddTableComponent @table-created="handleTableCreation"/>
         </div>
          <div class="table-container">
-             <button v-for="(table, index) in tables" :key="index" @click="clickOnTable(table)">{{ table.tableName }}</button>
+             <button v-for="(table, index) in tables" :key="index" @click="clickOnTable(table)">{{ table.name }}</button>
          </div>
     </section>
 </template>

@@ -3,17 +3,15 @@ import TableComponent from '@/components/TableComponents/TableComponent.vue';
 import { getTableById } from '@/composables/tableComposables/useGetTable';
 import NavbarComponent from '@/components/NavbarComponent.vue';
 import { getTables } from '@/composables/tableComposables/getTables';
-import { ref } from 'vue';
-
+import { onMounted, ref } from 'vue';
 
 // fetch all the tables from the db
-const tablesFromDb = await getTables();
-const listsIds = tablesFromDb.map(table => table.id);
-
+const tablesFromDb = ref(await getTables());
 
 // serve as the default table to be used
-// const table = await getTableById(2)
-// const selectedTable = ref(table);
+const table = ref(await getTableById(1))
+
+const selectedTable = ref(table);
 
 const componentKey = ref(0)
 
@@ -27,8 +25,7 @@ function handleSelectTable(tableToSelect) {
 <template>
   <main>
     <div>
-      <button @click="console.log(tables)">test</button>
-      <NavbarComponent :initial-tables="tables" @select-table="handleSelectTable" />
+      <NavbarComponent :initial-tables="tablesFromDb" @select-table="handleSelectTable" />
     </div>
     <div id="table">
       <TableComponent :initial-table="selectedTable" :key="componentKey" />

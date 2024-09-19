@@ -6,7 +6,7 @@ export const useTables =  () => {
   const tables = ref(null);
   const load = async() => {
     try {
-      const res = await axios.get(PATH_API);
+      const res = await axios.get(PATH_API + 'tables');
       tables.value = res.data;
     } catch (e) {
       console.error(e);
