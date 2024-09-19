@@ -42,15 +42,9 @@ const props = defineProps({
 
 const list = ref(props.initialList)
 
-// Define the type of modal to be opened
-const cardModal = "cardModal"
-const listNameModal = "listNameModal"
-
 let isAddingCard = ref(false);
-let isUpdatingListName = ref(false)
 
 
-//#region MODAL HANDLING
 function openModal(modal) {
     if (modal === cardModal) {
         isAddingCard.value = true;
@@ -68,31 +62,15 @@ function closeModal() {
 
 //#region EVENT HANDLING
 async function handleAddCard(card) {
-    console.log();
-
     list.value.cards.push(card)
-
-    console.log("list.value.id = ", list.value.id);
-    console.log("list.value = ", list.value);
-
-
     const res = await updateList(list.value.id, list.value)
-    console.log("This is response from updateList() : ", res);
-    console.table(res);
-
     list.value = res
     closeModal();
 }
 
-function handleListNameChange(listFrominput) {
-    list.value = listFrominput;
-    closeModal()
-}
 
 async function handleChange() {
     const res = await updateList(list.value.id, list.value)
-    console.log(res);
-
     list.value = res;
 
 }
@@ -101,10 +79,7 @@ async function handleChange() {
 <template>
     <section class="list">
         <header class="list-name">
-            <!-- Display the name or an input to change it -->
-
-            <!-- Decomposed ListComponent into sub component to not overcrowed parent with logic -->
-            <ListNameInputComponent @list-name-change="handleListNameChange" :initial-list="list"/>
+            <ListNameInputComponent :initial-list="list" />
             <button @click="$emit('delete')" class="delete-button">X</button>
         </header>
         <draggable :list="list.cards" group="cards" item-key="id" tag="div" @change="handleChange"
