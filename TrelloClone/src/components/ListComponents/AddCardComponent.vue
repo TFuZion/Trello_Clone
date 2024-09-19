@@ -6,6 +6,7 @@ import { Card } from '@/Classes/Card';
 // DOMInput = document.getElementById... This is needed to force focus on the input when it is displayed
 const DOMInput = ref(null)
 const cardName = ref('')
+const isOpen = ref(false)
 const emit = defineEmits(['add-card', 'close'])
 
 async function handleSubmit() {
@@ -24,14 +25,15 @@ function handleClose() {
     emit('close');
 }
 
-onMounted(() => {
-    DOMInput.value.focus();
-})
+// onMounted(() => {
+//     DOMInput.value.focus();
+// })
 
 </script>
 
 <template>
-    <form @submit.prevent="handleSubmit">
+    <button v-if="!isOpen" @click="isOpen = true" class="add-card-button">+ Add a new card</button>
+    <form v-else @submit.prevent="handleSubmit">
         <input ref="DOMInput" @keydown.enter="$event.target.blur()" @blur="handleSubmit" v-model="cardName" type="text"
             name="card-name" id="card-name" placeholder="Enter card's name...">
         <div class="button-container">
@@ -69,5 +71,15 @@ input:focus {
     margin-top: 8px;
     display: flex;
     gap: 1rem;
+}
+
+.add-card-button {
+    width: 100%;
+    border-radius: 8px;
+    padding: 6px 12px 6px 8px;
+}
+
+.add-card-button:hover {
+    background-color: #091E4224;
 }
 </style>

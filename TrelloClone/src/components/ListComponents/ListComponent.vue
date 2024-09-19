@@ -5,7 +5,6 @@ import ListNameInputComponent from './ListNameInputComponent.vue';
 import ProfilePictureComponent from '@/components/ListComponents/ProfilePictureComponent.vue';
 import draggable from 'vuedraggable'
 import { updateList, removeList } from '@/composables/ListRepository';
-import { useDeleteTable } from '@/composables/tableComposables/useDeleteTable';
 
 const props = defineProps({
     initialList: {
@@ -44,23 +43,6 @@ const props = defineProps({
 const emit = defineEmits(['deleted-list'])
 const list = ref(props.initialList)
 const isAddingCard = ref(false);
-
-
-function openModal(modal) {
-    if (modal === cardModal) {
-        isAddingCard.value = true;
-    }
-
-    if (modal === listNameModal) {
-        isUpdatingListName.value = true;
-    }
-}
-
-function closeModal() {
-    isAddingCard.value = false;
-    isUpdatingListName.value = false;
-}
-
 
 //#region EVENT HANDLING
 async function handleAddCard(card) {
@@ -110,13 +92,8 @@ async function deleteList() {
                 </div>
             </template>
         </draggable>
-        <!-- Display a button to add a card or an input to add a card -->
-        <div v-if="!isAddingCard">
-            <button @click="openModal(cardModal)" class="add-card-button">+ Add a new card</button>
-        </div>
-        <div v-else="isAddingCard">
-            <!-- Decomposed ListComponent into sub component to not overcrowed it with logic -->
-            <AddCardComponent @add-card="handleAddCard" @close="closeModal()" />
+        <div>
+            <AddCardComponent @add-card="handleAddCard" />
         </div>
     </section>
 </template>
@@ -212,13 +189,5 @@ ul {
 
 }
 
-.add-card-button {
-    width: 100%;
-    border-radius: 8px;
-    padding: 6px 12px 6px 8px;
-}
 
-.add-card-button:hover {
-    background-color: #091E4224;
-}
 </style>
