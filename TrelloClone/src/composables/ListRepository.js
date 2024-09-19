@@ -32,7 +32,7 @@ export async function addList(listToAdd) {
 
 export async function removeList(listId){
     try {
-        const res = await axios.delete(API + listId)
+        const res = await axios.delete(API + 'delete/' + listId)
         return res.data;
     } catch (error) {
         console.log(error);

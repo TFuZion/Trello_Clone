@@ -4,7 +4,9 @@ import AddCardComponent from './AddCardComponent.vue';
 import ListNameInputComponent from './ListNameInputComponent.vue';
 import ProfilePictureComponent from '@/components/ListComponents/ProfilePictureComponent.vue';
 import draggable from 'vuedraggable'
-import { updateList } from '@/composables/ListRepository';
+import { updateList, removeList } from '@/composables/ListRepository';
+import { useDeleteTable } from '@/composables/tableComposables/useDeleteTable';
+
 const props = defineProps({
     initialList: {
         type: Object,
@@ -39,10 +41,9 @@ const props = defineProps({
         }
     },
 })
-
+const emit = defineEmits(['deleted-list'])
 const list = ref(props.initialList)
-
-let isAddingCard = ref(false);
+const isAddingCard = ref(false);
 
 
 function openModal(modal) {
@@ -54,33 +55,48 @@ function openModal(modal) {
         isUpdatingListName.value = true;
     }
 }
+
 function closeModal() {
     isAddingCard.value = false;
     isUpdatingListName.value = false;
 }
-//#endregion
+
 
 //#region EVENT HANDLING
 async function handleAddCard(card) {
     list.value.cards.push(card)
-    const res = await updateList(list.value.id, list.value)
-    list.value = res
+    const result = await updateList(list.value.id, list.value)
+    list.value = result
     closeModal();
 }
 
 
 async function handleChange() {
-    const res = await updateList(list.value.id, list.value)
-    list.value = res;
+    try {
+        const result = await updateList(list.value.id, list.value)
+        list.value = result;
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+async function deleteList() {
+    try {
+        await removeList(list.value.id)
+        emit('deleted-list', list.value)
+    } catch (error) {
+        console.log(error);
+    }
 
 }
 //#endregion
+
 </script>
 <template>
     <section class="list">
         <header class="list-name">
             <ListNameInputComponent :initial-list="list" />
-            <button @click="$emit('delete')" class="delete-button">X</button>
+            <button @click="deleteList" class="delete-button">X</button>
         </header>
         <draggable :list="list.cards" group="cards" item-key="id" tag="div" @change="handleChange"
             class="card-container">

@@ -8,22 +8,31 @@ import AddListComponent from '../ListComponents/AddListComponent.vue';
 const props = defineProps({
   initialTable: Object
 })
-
-
-
 const table = ref(props.initialTable)
 
 const { updateTable } = useUpdateTable()
 
 async function handleChange() {
-  const res = await updateTable(table.value.id, table.value)
-  table.value = res;
+  try {
+    const res = await updateTable(table.value.id, table.value)
+    table.value = res;
+  } catch (error) {
+    console.log(error);
+  }
+
 }
 
 function handleAddList(newList) {
   table.value.lists.push(newList)
 
 }
+
+function handleDeleteList(value) {
+  const index = table.value.lists.indexOf(value)
+  table.value.lists.splice(index, 1)
+}
+
+
 
 </script>
 
@@ -32,7 +41,7 @@ function handleAddList(newList) {
     <draggableComponent :list="table.lists" item-key="id" group="list" tag="section" @change="handleChange"
       class="grid">
       <template #item="{ element }">
-        <ListComponent :initial-list="element" />
+        <ListComponent :initial-list="element" @deleted-list="handleDeleteList" />
       </template>
     </draggableComponent>
     <AddListComponent @add-list="handleAddList" class="addList" />
