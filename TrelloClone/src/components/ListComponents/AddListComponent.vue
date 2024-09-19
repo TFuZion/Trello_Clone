@@ -24,12 +24,12 @@ async function handleSubmit() {
 
 }
 
-function handleClose() {
+function closeModal() {
     isActive.value = false;
 }
 
 
-function changeState() {
+function openModal() {
     isActive.value = true;
 }
 
@@ -42,14 +42,14 @@ watch(DOMInput, () => {
 </script>
 
 <template>
-    <button v-if="!isActive" @click="changeState" class="create-button">+ Add a new list</button>
+    <button v-if="!isActive" @click="openModal" class="create-button">+ Add a new list</button>
     <section v-else>
         <form @submit.prevent="handleSubmit">
             <input ref="DOMInput" @keydown.enter="$event.target.blur()" @blur="handleSubmit" v-model="listName"
                 type="text" name="list-name" id="list-name" placeholder="Enter list's name...">
             <div class="button-container">
                 <button type="submit" class="add-button">Create a list</button>
-                <button type="button" @click="handleClose()">X</button>
+                <button type="button" @click="closeModal()">X</button>
             </div>
         </form>
     </section>
