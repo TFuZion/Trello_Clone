@@ -1,8 +1,10 @@
 <script setup>
-import {  ref, watch } from 'vue'
-import { List } from '@/Classes/List';
+import { ref, watch } from 'vue'
 import { addList } from '@/composables/ListRepository';
 
+const props = defineProps({
+    initialTable: Object
+})
 const isActive = ref(false)
 // DOMInput = document.getElementById... This is needed to force focus on the input when it is displayed
 const DOMInput = ref(null)
@@ -10,17 +12,20 @@ const listName = ref('')
 const emit = defineEmits(['add-list', 'close'])
 
 async function handleSubmit() {
-
     if (listName.value === '') {
         isActive.value = false;
         return;
     }
 
-    const table = new List(listName.value);
-    const res = await addList(table);
-    console.log(res);
+    const list = {
+        name: listName.value,
+        tableId: props.initialTable.id
+    };
+
+    const result = await addList(list);
+    list.id = result.list.id
     isActive.value = false;
-    emit('add-list', res)
+    emit('add-list', list)
 
 }
 
@@ -35,10 +40,11 @@ function openModal() {
 
 
 watch(DOMInput, () => {
-    if(DOMInput.value){
+    if (DOMInput.value) {
         DOMInput.value.focus();
     }
 })
+
 </script>
 
 <template>

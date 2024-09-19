@@ -24,7 +24,6 @@ async function handleChange() {
 
 function handleAddList(newList) {
   table.value.lists.push(newList)
-
 }
 
 function handleDeleteList(value) {
@@ -44,7 +43,7 @@ function handleDeleteList(value) {
         <ListComponent :initial-list="element" @deleted-list="handleDeleteList" />
       </template>
     </draggableComponent>
-    <AddListComponent @add-list="handleAddList" class="addList" />
+    <AddListComponent @add-list="handleAddList" class="addList" :initial-table="table"/>
   </section>
 </template>
 
