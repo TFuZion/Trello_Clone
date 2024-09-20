@@ -19,7 +19,8 @@ async function handleSubmit() {
 
     const list = {
         name: listName.value,
-        tableId: props.initialTable.id
+        tableId: props.initialTable.id,
+        cards: []
     };
 
     const result = await addList(list);

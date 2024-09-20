@@ -1,7 +1,11 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { addCard } from '@/composables/cardRepository/CardRepository';
 import { Card } from '@/Classes/Card';
+
+const props = defineProps({
+    initialList: Object
+})
 
 // DOMInput = document.getElementById... This is needed to force focus on the input when it is displayed
 const DOMInput = ref(null)
@@ -14,7 +18,10 @@ async function handleSubmit() {
         handleClose();
         return
     }
-    const card = new Card(cardName.value)
+    const card = {
+        name: cardName.value,
+        listId: props.initialList.id
+    }
     const res = await addCard(card)
     emit('add-card', res)
     cardName.value = '';
@@ -25,9 +32,6 @@ function handleClose() {
     emit('close');
 }
 
-// onMounted(() => {
-//     DOMInput.value.focus();
-// })
 
 </script>
 

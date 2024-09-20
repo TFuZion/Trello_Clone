@@ -42,14 +42,10 @@ const props = defineProps({
 })
 const emit = defineEmits(['deleted-list'])
 const list = ref(props.initialList)
-const isAddingCard = ref(false);
 
 //#region EVENT HANDLING
-async function handleAddCard(card) {
-    list.value.cards.push(card)
-    const result = await updateList(list.value.id, list.value)
-    list.value = result
-    closeModal();
+async function handleAddCard(value) {
+    list.value.cards.push(value)
 }
 
 
@@ -93,7 +89,7 @@ async function deleteList() {
             </template>
         </draggable>
         <div>
-            <AddCardComponent @add-card="handleAddCard" />
+            <AddCardComponent @add-card="handleAddCard" :initial-list="list" />
         </div>
     </section>
 </template>
