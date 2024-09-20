@@ -4,6 +4,7 @@ import draggableComponent from 'vuedraggable';
 import { ref } from 'vue'
 import { useUpdateTable } from '@/composables/tableComposables/useUpdateTable';
 import AddListComponent from '../ListComponents/AddListComponent.vue';
+import { updateList } from '@/composables/ListRepository';
 
 const props = defineProps({
   initialTable: Object
@@ -12,15 +13,18 @@ const table = ref(props.initialTable)
 
 const { updateTable } = useUpdateTable()
 
-async function handleChange() {
-  try {
-    const res = await updateTable(table.value.id, table.value)
-    table.value = res;
-  } catch (error) {
-    console.log(error);
-  }
+// async function handleChange(event) {
+//   try {
+//     if(event.added){
+//       const list = event.added.element;
+//       list.tableId = props.initialTable.id
+//       await updateList(list)
+//     }
+//   } catch (error) {
+//     console.log(error);
+//   }
 
-}
+// }
 
 function handleAddList(newList) {
   table.value.lists.push(newList)
@@ -31,13 +35,11 @@ function handleDeleteList(value) {
   table.value.lists.splice(index, 1)
 }
 
-
-
 </script>
 
 <template>
   <section id="table-container">
-    <draggableComponent :list="table.lists" item-key="id" group="list" tag="section" @change="handleChange"
+    <draggableComponent :list="table.lists" item-key="id" group="list" tag="section" 
       class="grid">
       <template #item="{ element }">
         <ListComponent :initial-list="element" @deleted-list="handleDeleteList" />

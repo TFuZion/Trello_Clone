@@ -4,7 +4,8 @@ import AddCardComponent from './AddCardComponent.vue';
 import ListNameInputComponent from './ListNameInputComponent.vue';
 import ProfilePictureComponent from '@/components/ListComponents/ProfilePictureComponent.vue';
 import draggable from 'vuedraggable'
-import { updateList, removeList } from '@/composables/ListRepository';
+import { removeList, getListByTableId } from '@/composables/ListRepository';
+import { updateCard } from '@/composables/cardRepository/CardRepository';
 
 const props = defineProps({
     initialList: {
@@ -49,10 +50,25 @@ async function handleAddCard(value) {
 }
 
 
-async function handleChange() {
+// async function handleChange() {
+//     try {
+//         console.log(list.value);
+//         const result = await updateCard(list.value, list.value)
+//         list.value = result;
+//     } catch (error) {
+//         console.log(error);
+//     }
+// }
+
+async function handleChange(event) {
     try {
-        const result = await updateList(list.value.id, list.value)
-        list.value = result;
+        // @change event from vueDraggable is played twice because an element is removed from a list and added into another
+        // event.added doesn't exist on the removed part so it throws an error
+        if (event.added) {
+            const card = event.added.element;
+            card.listId = props.initialList.id;
+            await updateCard(card);
+        }
     } catch (error) {
         console.log(error);
     }
@@ -184,6 +200,4 @@ ul {
     padding: 8px 8px 0px;
 
 }
-
-
 </style>

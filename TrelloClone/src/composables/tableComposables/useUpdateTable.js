@@ -5,8 +5,9 @@ export const useUpdateTable = () => {
 
   const updateTable = async (id, table) => {
     try {
-      const res = await axios.put(PATH_API + id, table);
-      return res.data;
+      const response = await axios.put(PATH_API + 'update/' + id, table);
+      console.log(response);
+      return response.data.table;
     } catch (e) {
       console.error(e);
     }
