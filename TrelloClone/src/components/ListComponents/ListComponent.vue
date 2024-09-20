@@ -50,28 +50,32 @@ async function handleAddCard(value) {
 }
 
 
-// async function handleChange() {
-//     try {
-//         console.log(list.value);
-//         const result = await updateCard(list.value, list.value)
-//         list.value = result;
-//     } catch (error) {
-//         console.log(error);
-//     }
-// }
-
 async function handleChange(event) {
     try {
         // @change event from vueDraggable is played twice because an element is removed from a list and added into another
         // event.added doesn't exist on the removed part so it throws an error
         if (event.added) {
+            // console.log(event.added);
             const card = event.added.element;
             card.listId = props.initialList.id;
-            await updateCard(card);
+            // card.index = event.added.newIndex
+            // console.log(list.value.cards);
+
+            // await updateCard(card);
         }
+
     } catch (error) {
         console.log(error);
     }
+}
+
+async function handleSort(event) {
+    console.log(event);
+    list.value.cards.map(async (el) => {
+        el.index = list.value.cards.indexOf(el)
+        await updateCard(el)
+    })
+
 }
 
 async function deleteList() {
@@ -81,7 +85,6 @@ async function deleteList() {
     } catch (error) {
         console.log(error);
     }
-
 }
 //#endregion
 
@@ -92,7 +95,7 @@ async function deleteList() {
             <ListNameInputComponent :initial-list="list" />
             <button @click="deleteList" class="delete-button">X</button>
         </header>
-        <draggable :list="list.cards" group="cards" item-key="id" tag="div" @change="handleChange"
+        <draggable :list="list.cards" group="cards" item-key="id" tag="div" @change="handleChange" @sort="handleSort"
             class="card-container">
             <template #item="{ element, index }">
                 <div class="card">

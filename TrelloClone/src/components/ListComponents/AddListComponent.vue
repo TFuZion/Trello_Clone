@@ -16,18 +16,17 @@ async function handleSubmit() {
         isActive.value = false;
         return;
     }
-
     const list = {
         name: listName.value,
         tableId: props.initialTable.id,
-        cards: []
+        cards: [],
+        index: props.initialTable.lists.length + 1
     };
 
     const result = await addList(list);
     list.id = result.list.id
     isActive.value = false;
     emit('add-list', list)
-
 }
 
 function closeModal() {

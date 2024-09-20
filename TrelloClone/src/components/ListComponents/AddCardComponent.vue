@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { addCard } from '@/composables/cardRepository/CardRepository';
 
 const props = defineProps({
@@ -19,18 +19,25 @@ async function handleSubmit() {
     }
     const card = {
         name: cardName.value,
-        listId: props.initialList.id
+        listId: props.initialList.id,
+        index: props.initialList.cards.length + 1
     }
     const res = await addCard(card)
     emit('add-card', res)
     cardName.value = '';
+    isOpen.value = false;
 }
 
 function handleClose() {
     cardName.value = '';
-    emit('close');
+    isOpen.value = false
 }
 
+watch(DOMInput, () => {
+    if (DOMInput.value) {
+        DOMInput.value.focus();
+    }
+})
 
 </script>
 

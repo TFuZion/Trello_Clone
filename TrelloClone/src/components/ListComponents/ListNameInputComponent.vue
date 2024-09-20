@@ -47,8 +47,8 @@ async function handleSubmit() {
         isOpen.value = false;
         return;
     }
-    list.value.name = listName
-    const res = await updateList(list.value.id, list.value)
+    list.value.name = listName.value
+    const res = await updateList(list.value)
     emit('list-name-change', res)
     isOpen.value = false;
 }
@@ -68,7 +68,7 @@ function openModal(){
 <template>
     <!-- <button @click="console.log(listName)">test</button> -->
     <h2 v-if="!isOpen" @click="openModal()">
-        {{ list.name }}
+        {{ listName }}
     </h2>
     <form v-else @submit.prevent="handleSubmit">
         <input ref="DOMInput" @keydown.enter="$event.target.blur()" @blur="handleSubmit" type="text" name="card-name"
