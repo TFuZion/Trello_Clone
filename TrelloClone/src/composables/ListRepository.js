@@ -1,5 +1,5 @@
 import axios from 'axios'
-const API = "http://localhost:3000/lists/"
+const API = import.meta.env.VITE_APP_DB_URL + 'lists/'
 
 export async function getList(){
     const lists = ref([])
@@ -14,7 +14,7 @@ export async function getList(){
 
 export async function updateList(listId, updatedList){
     try {
-        const res = await axios.put(API + listId, updatedList)
+        const res = await axios.put(API + 'update/' + listId, updatedList)
         return res.data
     } catch (error) {
         console.log(error);
@@ -23,7 +23,7 @@ export async function updateList(listId, updatedList){
 
 export async function addList(listToAdd) {
     try {
-        const res = await axios.post(API, listToAdd)
+        const res = await axios.post(API + 'create', listToAdd)
         return res.data;
     } catch (error) {
         console.log(error);
@@ -32,7 +32,7 @@ export async function addList(listToAdd) {
 
 export async function removeList(listId){
     try {
-        const res = await axios.delete(API + listId)
+        const res = await axios.delete(API + 'delete/' + listId)
         return res.data;
     } catch (error) {
         console.log(error);

@@ -1,14 +1,13 @@
-import { Table } from "@/Classes/Table"
-import axios from "axios"
+import { Table } from "@/Classes/Table";
+import axios from "axios";
 
-export async function getTableById(tableId){
-    const API = "http://localhost:3000/tables/" + tableId
+export async function getTableById(tableId) {
+  const API = import.meta.env.VITE_APP_DB_URL + "tables/" + tableId;
 
-    try {
-        const res = await axios.get(API)
-        return res.data
-        
-    } catch (error) {
-        console.log(error)
-    }
+  try {
+    const res = await axios.get(API);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+  }
 }

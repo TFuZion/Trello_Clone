@@ -1,8 +1,10 @@
 <script setup>
-import {  ref, watch } from 'vue'
-import { List } from '@/Classes/List';
+import { ref, watch } from 'vue'
 import { addList } from '@/composables/ListRepository';
 
+const props = defineProps({
+    initialTable: Object
+})
 const isActive = ref(false)
 // DOMInput = document.getElementById... This is needed to force focus on the input when it is displayed
 const DOMInput = ref(null)
@@ -10,46 +12,51 @@ const listName = ref('')
 const emit = defineEmits(['add-list', 'close'])
 
 async function handleSubmit() {
-
     if (listName.value === '') {
         isActive.value = false;
         return;
     }
 
-    const table = new List(listName.value);
-    const res = await addList(table);
-    console.log(res);
+    const list = {
+        name: listName.value,
+        tableId: props.initialTable.id,
+        cards: []
+    };
+
+    const result = await addList(list);
+    list.id = result.list.id
     isActive.value = false;
-    emit('add-list', res)
+    emit('add-list', list)
 
 }
 
-function handleClose() {
+function closeModal() {
     isActive.value = false;
 }
 
 
-function changeState() {
+function openModal() {
     isActive.value = true;
 }
 
 
 watch(DOMInput, () => {
-    if(DOMInput.value){
+    if (DOMInput.value) {
         DOMInput.value.focus();
     }
 })
+
 </script>
 
 <template>
-    <button v-if="!isActive" @click="changeState" class="create-button">+ Add a new list</button>
+    <button v-if="!isActive" @click="openModal" class="create-button">+ Add a new list</button>
     <section v-else>
         <form @submit.prevent="handleSubmit">
             <input ref="DOMInput" @keydown.enter="$event.target.blur()" @blur="handleSubmit" v-model="listName"
                 type="text" name="list-name" id="list-name" placeholder="Enter list's name...">
             <div class="button-container">
                 <button type="submit" class="add-button">Create a list</button>
-                <button type="button" @click="handleClose()">X</button>
+                <button type="button" @click="closeModal()">X</button>
             </div>
         </form>
     </section>

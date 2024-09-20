@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const useUpdateTable = () => {
-  const PATH_API = "http://localhost:3000/tables/";
+  const PATH_API = import.meta.env.VITE_APP_DB_URL;
 
   const updateTable = async (id, table) => {
     try {

@@ -3,53 +3,51 @@ import { ref } from "vue";
 import { useCreateTable } from "@/composables/tableComposables/useCreateTable";
 import { useTables } from "@/composables/tableComposables/useTable";
 
+const emit = defineEmits(['table-created'])
 const PATH_BACKGROUND = "../../assets/backgroundTableImg/";
 const classBackgroudTableImg = ref("c");
 const nameTable = ref("");
+const isOpen = ref(false)
 const { load } = useTables();
 const { createTable } = useCreateTable();
 const handleCreateTable = async () => {
   const table = {};
-  console.log(nameTable.value);
   table.name = nameTable.value;
-  console.log(classBackgroudTableImg.value);
   switch (classBackgroudTableImg.value) {
     case "a":
-      table.background = `${PATH_BACKGROUND}ice.svg`;
+      table.backgroundUrl = `${PATH_BACKGROUND}ice.svg`;
       break;
     case "b":
-      table.background = `${PATH_BACKGROUND}ocean.svg`;
+      table.backgroundUrl = `${PATH_BACKGROUND}ocean.svg`;
       break;
     case "c":
-      table.background = `${PATH_BACKGROUND}crystal.svg`;
+      table.backgroundUrl = `${PATH_BACKGROUND}crystal.svg`;
       break;
     case "d":
-      table.background = `${PATH_BACKGROUND}rainbow.svg`;
+      table.backgroundUrl = `${PATH_BACKGROUND}rainbow.svg`;
       break;
     case "e":
-      table.background = `${PATH_BACKGROUND}sun.svg`;
+      table.backgroundUrl = `${PATH_BACKGROUND}sun.svg`;
       break;
     case "f":
-      table.background = `${PATH_BACKGROUND}flower.svg`;
+      table.backgroundUrl = `${PATH_BACKGROUND}flower.svg`;
       break;
     case "g":
-      table.background = `${PATH_BACKGROUND}earth.svg`;
+      table.backgroundUrl = `${PATH_BACKGROUND}earth.svg`;
       break;
     case "h":
-      table.background = `${PATH_BACKGROUND}alien.svg`;
+      table.backgroundUrl = `${PATH_BACKGROUND}alien.svg`;
       break;
     case "i":
-      table.background = `${PATH_BACKGROUND}volcano.svg`;
+      table.backgroundUrl = `${PATH_BACKGROUND}volcano.svg`;
       break;
     default:
-      table.background = `${PATH_BACKGROUND}ice.svg`;
+      table.backgroundUrl = `${PATH_BACKGROUND}ice.svg`;
   }
+  isOpen.value = false;
   await createTable(table);
-  load();
-  console.log(table);
+  emit('table-created', table)
 };
-
-const isOpen = ref(false)
 
 function setBackground(value){  
   classBackgroudTableImg.value = value
