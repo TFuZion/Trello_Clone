@@ -1,4 +1,3 @@
-import { Table } from "@/Classes/Table";
 import axios from "axios";
 
 export async function getTableById(tableId) {

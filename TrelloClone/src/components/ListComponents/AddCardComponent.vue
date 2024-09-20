@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
 import { addCard } from '@/composables/cardRepository/CardRepository';
-import { Card } from '@/Classes/Card';
 
 const props = defineProps({
     initialList: Object
